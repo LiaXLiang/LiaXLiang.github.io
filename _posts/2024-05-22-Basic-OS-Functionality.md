@@ -1,5 +1,3 @@
-# Chap1: &nbsp; Basic OS Functionality
-
 ## 1. The role of an operating system
 ### Intuition
 &nbsp; Computer systems are complex machines with a large number of components. Application programmers cannot be expected to know how to program ALL kinds of devices, and even if they do, they would rewrite the exact same code for every application, for example, the code to read inputs from the keyboard. Furthermore, resources can be shared by multiple programs: expecting programs to collaborate and not mess with each other is not possible, e.g., the printer can only print one coherent job at a time. 
