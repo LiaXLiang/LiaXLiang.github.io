@@ -16,10 +16,15 @@
 - Kernel: executes critical operations with a high level of privilege (*supervisor mode*) and directly interacts with hardware. 
 <br>User interface programs go through the kernel to manipulate the state of the underlying hardware.  
 
-![](assets/img/OS_Lectures/Chap1/01_OSLayers.png)
+<figure>
+    <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap1/01_OSLayers.png?raw=true" alt="OS Layers">
+</figure>
 
 ## 2. Generic Computer Hardware Architecture
-![](assets/img/OS_Lectures/Chap1/02_Generic_Computer_Architecture.png)
+
+<figure>
+    <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap1/02_Generic_Computer_Architecture.png?raw=true" alt="Generic Computer Architecture">
+</figure>
 #### CPU / Central Processing Unit
 - CPU is the processor that performs the actual computation. How? It operates by fetching instructions from the main memory and temporarily storing them in its cache, once the required instructions and data are loaded into the cache, the CPU performs the computation tasks as dictated by the instructions. 
 - There are multiple “cores” common in today’s processors
@@ -60,7 +65,10 @@ The need for isolation is crucial. Certain operations, if performed incorrectly,
 Base and limit registers are loaded by the OS before starting a program. 
 <br> The CPU checks each user reference (instruction and data addresses), ensuring it falls between the base and limit register values.
 
-![](assets/img/OS_Lectures/Chap1/03_Baselimit_Register.png)
+<figure>
+    <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap1/03_Baselimit_Register.png?raw=true" alt="Base- Limit Registers">
+</figure>
+
 
 <br> *Register* is a dedicated name for **one word of memory** managed by CPU  
 (one word: CPU一次能并行处理的二进制位数)
@@ -140,7 +148,9 @@ Timer - Accounting and Billing:
 |(-) | Limited safety: Even separate programs within the kernel operate with the same privileges, increasing the risk of widespread system issues from a single fault. i.e., if one kernel component crashes, the whole system crashes | Limited performance: IPCs are costly and numerous in such an architecture | - | Usability: hard to build unikernels due to lack of features supported|
 |Examples | Unix family: BSD, Solaris <br> Unix-like: Linux <br> DOS: MS-DOS <br>Critical embedded systems: Cisco IOS | Minix <br> L4 family: seL4, OKL4, sepOS <br> Mach <br> Zircon |  Windows NT <br> XNU (Mach + BSD)| Unikraft <br> clickOS <br> IncludeOS|
 
-![](assets/img/OS_Lectures/Chap1/04_Kernel_Architectures.png)
+<figure>
+    <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap1/04_Kernel_Architectures.png?raw=true" alt="Kernel Architectures">
+</figure>
 
 
 
