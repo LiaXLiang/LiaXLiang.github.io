@@ -1,15 +1,74 @@
+/* 表格的基本样式 */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 }
 
+/* 表格边框和内边距 */
 table, th, td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
+/* 表头样式 */
 th {
     background-color: #f2f2f2;
     text-align: left;
+    font-weight: bold;
 }
+
+/* 表格内容样式 */
+td {
+    vertical-align: top; /* 保证单元格内容顶部对齐 */
+}
+
+/* 让表格中的超链接颜色 */
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 确保图片居中显示 */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 处理 figure 标签的样式 */
+figure {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-size: 12px;
+    color: #555;
+}
+
+
+.half {
+    display: flex;
+    justify-content: space-between;
+}
+
+.half img {
+    max-width: 48%;
+    height: auto;
+}
+
