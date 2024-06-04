@@ -59,6 +59,7 @@ For ALL categories, there are 2 general metrics:
 - Non-preemptive schedulers choose a process to run and let it run until it *blocks*, *terminates* or voluntarily *yields* the CPU.
 - Preemptive schedulers might stop a *running* process to execute another one after a given period of time. Preemption is only possible on systems with a hardware clock.
 ### Batch Scheduling
+
 | Algorithms      | FCFS <br>First-Come, First Served | SJF <br> Shortest Job First | SRT <br> Shortest Remaining Time |
 | --------------- | --------------------------------- | --------------------------- | -------------------------------- |
 | **Runqueue**    | Processes are stored in a list sorted by order of *arrival*, with the *first* element being the *oldest*. | SJF assumes that a job’s run time is known in advance. Processes are stored in a list sorted by increasing *total CPU time* | Processes are stored in a list sorted by increasing *remaining duration* |
@@ -69,13 +70,16 @@ For ALL categories, there are 2 general metrics:
 | **(-)**         | ① Average wait time is highly variable as short jobs may wait behind long jobs. <br> ② With many processes, long latencies for IO-bound processes and high turnaround time for CPU-bound processes. <br> (Poor overlap of I/O and CPU operations since CPU-bound processes will force I/O bound processes to wait for the CPU, leaving the I/O devices idle.) | Long running CPU bound jobs can starve | Impossible to predict the amount of CPU time a job has left |
 
 
+
 ### Interactive Scheduling
+
 | Algorithms      | Round-Robin | MLQ <br> / Multilevel Feedback Queues | Fair |
 | --------------- | ----------- |---------------------------------------|------|
-| **Intuition**   | Each process is assigned a time interval (Quantum) during which it is allowed to run. When the process uses up its quantum, it is **preempted** and put back to the end of the FIFO-queue. | Use *Round Robin* at each priority level, jobs are executed starting from the highest priority queue. Only when this queue is empty will jobs in the next highest priority queue be executed | A fair scheduler tries to give the same amount of CPU time to all processes. Some may also enforce fairness between users (so-called *fair-share schedulers*) |
-| **(+)**         | It's fair, each job gets an equal shot at the CPU. | MLQ policy is *adaptive* because it relies on past behavior to predict the future and assign job priorities, it overcomes the prediction problem in SJF. <br> CPU-bound jobs quickly drop in priority, while I/O-bound jobs remain at a high priority. | Fairness |
-| **(-)**         | Average waiting time can be bad. | Lower priority jobs might starve if higher priority queues continuously receive new jobs. | Increased overhead |
-| **Selecting Criterion** | **Selecting a time slice:** <br> - Too large: waiting time suffers, degenerates to FCFS if processes are never preempted <br> - Too small: *Throughput* suffers because too much time is spent context switching. <br> → Balance these tradeoffs by selecting a time slice where context switching is roughly 1% of the time slice. | &nbsp; - **Starting priority:** Every newly arriving job begins in the highest priority queue; <br> &nbsp; - **Priority drop:** If a job uses up its entire time slice without completing, drop its priority one level down; <br> &nbsp; - **Priority boost:** If a job makes an I/O request before its time slice expires, it is moved up to a higher priority queue, promoting jobs that are I/O-bound and ensuring they receive more CPU time. | e.g., user A starts 9 processes, user B starts 1 process, they should still get 50% of the CPU each. |
+| **Intuition**   | Each process is assigned a time interval (Quantum) during which it is allowed to run. When the process uses up its quantum, it is **preempted** and put back to the end of the FIFO-queue. | Use *Round Robin* at each priority level, jobs are executed starting from the highest priority queue. Only when this queue is empty will jobs in the next highest priority queue be executed. | A fair scheduler tries to give the same amount of CPU time to all processes. Some may also enforce fairness between users (so-called *fair-share schedulers*). |
+| **(+)**         | It's fair, each job gets an equal shot at the CPU. | MLQ policy is *adaptive* because it relies on past behavior to predict the future and assign job priorities, it overcomes the prediction problem in SJF. <br> CPU-bound jobs quickly drop in priority, while I/O-bound jobs remain at a high priority. | Fairness. |
+| **(-)**         | Average waiting time can be bad. | Lower priority jobs might starve if higher priority queues continuously receive new jobs. | Increased overhead. |
+| **Selecting Criterion** | **Selecting a time slice:** <br> - Too large: waiting time suffers, degenerates to FCFS if processes are never preempted. <br> - Too small: *Throughput* suffers because too much time is spent context switching. <br> → Balance these tradeoffs by selecting a time slice where context switching is roughly 1% of the time slice. | - **Starting priority:** Every newly arriving job begins in the highest priority queue. <br> - **Priority drop:** If a job uses up its entire time slice without completing, drop its priority one level down. <br> - **Priority boost:** If a job makes an I/O request before its time slice expires, it is moved up to a higher priority queue, promoting jobs that are I/O-bound and ensuring they receive more CPU time. | e.g., user A starts 9 processes, user B starts 1 process, they should still get 50% of the CPU each. |
+
 
 
 ### Real Time Scheduling
