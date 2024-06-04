@@ -1,6 +1,6 @@
-# Chapter2: Process Management
+## Chapter2: Process Management
 
-## 1. Process v.s. Program
+### 1. Process v.s. Program
 - A *Program* is a set of static instructions and data, typically stored on disk.
 - A *Process* is a **dynamic** concept, representing an active instance of a running program. The process executes sequentially, one instruction at a time. 
 
@@ -22,7 +22,7 @@
 
 
 
-## 2. Process Execution State
+### 2. Process Execution State
 <figure>
     <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap2/2.Process_Execution_State.png?raw=true" alt="Process Execution State">
 </figure>
@@ -42,8 +42,8 @@ actions (scheduling), and external actions (interrupts).
 </figure>
 
 
-## 3. How are processes represented in the OS? 
-### I. Process Control Block (PCB / 进程控制块) 
+### 3. How are processes represented in the OS? 
+#### I. Process Control Block (PCB / 进程控制块) 
 &nbsp; PCB is an OS data structure in order for OS to keep track of all processes. 
 <br> &nbsp; The OS allocates a new PCB on the creation of each process and places it
 on a state queue; The PCB tracks the execution state and location of each process; The OS deallocates the PCB when the process terminates.
@@ -66,14 +66,14 @@ on a state queue; The PCB tracks the execution state and location of each proces
 - Process-, parent process-, and user-ID(who is the owner of the process)
 
 
-### II. How are PCBs organized? 
+#### II. How are PCBs organized? 
 The OS maintains the PCBs of all the processes in state queues.
 
 <figure>
     <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap2/3a.StateQueue.png?raw=true" alt="State Queue">
 </figure>
 
-## 4. How does the OS change the currently running process?
+### 4. How does the OS change the currently running process?
 
 Stopping one and starting another processes involves a **context switch**, which is a relatively expensive operation. 
 <br> e.g., Context switching between the *running* process A and the *ready* process B happens in several steps:
@@ -88,16 +88,3 @@ Stopping one and starting another processes involves a **context switch**, which
 - ④ Change the state of B from ready to *running*
 
 This switching of the CPU from one process to another ensures that multiple processes can share the CPU effectively, but it involves overhead due to saving and loading register states.
-
-
-## How are processes created in the system?
-
-##  How do processes communicate? Is this efficient?
-
-### Heading 3 for Subsection
-
-#### Heading 4 for Subsubsection
-
-##### Heading 5
-
-###### Heading 6
