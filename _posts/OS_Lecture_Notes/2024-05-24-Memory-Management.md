@@ -42,9 +42,9 @@ Copy user memory to/from a storage device, e.g., hard drive.
 e.g. If we want to context switch between processes A and B:
 
 - Move the currently running process (A)’s memory to storage.
-  - A’s memory: RAM $\rightarrow$ storage
+  - A’s memory: RAM → storage
 - Move the newly scheduled process (B)’s memory into RAM 
-  - B’s memory: storage $\rightarrow$ RAM
+  - B’s memory: storage → RAM
 
 #### (3) Limitations
 - Copying to/from storage is very costly 
@@ -70,16 +70,32 @@ e.g. If we want to context switch between processes A and B:
 - The range of virtual addresses (from 0 to size of the process) that is available to a process is known as the process's (virtual) address space. 
 - They are independent from each other and may be mapped to any physical address in memory. e.g., address 1000 of two different address spaces can be mapped to different physical addresses. Manipulating address spaces can be done in various ways, with different hardware supports.
 
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+</style>
 #### (3) Address Space Size
 - **Fixed-size** address space: <br> Whenever a process is created or swapped in, a contiguous chunk of memory of the size of the process’ address space is allocated. Note that *eviction/驱逐* or *compaction/压缩* may happen to make this possible.
 - **Variable-size** address space: Depending on the memory layout of address spaces, they could grow in different directions.
 
-   | Classic UNIX layout    | Fixed-stack layout |
-   | --------- | ----------- |
-   | Stack and heap grow towards each other    | Stack has a fixed maximum size, and heap grows towards the limit       |
-    When Stack and Heap touch each other, the process is Out-of-Memory (OoM): it can be killed or grow. | When the stack reaches the limit, the process is OoM        |
-   |   Growing requires to: <br> ① Move the *limit* register to increase the size of the address space<br> ②  Move the *stack* up to the limit to allow stack and heap to grow again    |       Growing requires to move the *limit* register      |
+
+  | Classic UNIX layout    | Fixed-stack layout |
+  | :---------------------- | :------------------ |
+  | Stack and heap grow towards each other | Stack has a fixed maximum size, and heap grows towards the limit |
+  | When Stack and Heap touch each other, the process is Out-of-Memory (OoM): it can be killed or grow. | When the stack reaches the limit, the process is OoM |
+  | **Growing requires to:** <br> ① Move the *limit* register to increase the size of the address space <br> ② Move the *stack* up to the limit to allow stack and heap to grow again | **Growing requires to move the *limit* register** |
+
 
 - Note that this is from the address space perspective. The OS may still need to move/evict/compact memory to find a free chunk large enough.
 
@@ -95,7 +111,7 @@ e.g. If we want to context switch between processes A and B:
 
     When the process accesses a memory address X, the CPU automatically:
     - ① Adds the value of the base register: &nbsp;  *addr* = X + base
-    - ② Checks that the result is contained in the address space: base $\leq$ *addr* $<$ base + limit <br> Addresses that exceed this limit trigger an address trap, leading the processor to disregard the invalid physical address.
+    - ② Checks that the result is contained in the address space: base ≤ *addr* < base + limit <br> Addresses that exceed this limit trigger an address trap, leading the processor to disregard the invalid physical address.
 <figure>
     <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap4/2.3DynamicRelocation.png?raw=true" alt="Relocation">
 </figure>
@@ -109,16 +125,18 @@ e.g. If we want to context switch between processes A and B:
 
 - (-) Slows down hardware due to the add on every memory reference.
 - (-) Can't share memory (such as program text) between processes.
-- (-) Process is still limited to physical memory size. Address spaces cannot be larger than physical memory. <br> $\Rightarrow$ Degree of multiprogramming is very limited since all memory of all active processes must fit in memory.
+- (-) Process is still limited to physical memory size. Address spaces cannot be larger than physical memory. <br> → Degree of multiprogramming is very limited since all memory of all active processes must fit in memory.
 - (-) Fragmentation cannot be avoided, only mitigated. Compaction is also costly as entire address spaces must be moved in memory.
 
 ## 4. Memory Allocation Policies
 ### I. Fragmentation
-| |External Fragmentation | Internal Fragmentation
------------- |------------ | -------------|
-|Description |External fragmentation occurs when there is *enough* total memory to satisfy a request but the available memory is not contiguous.  | Internal fragmentation occurs when memory allocated to a process is slightly larger than what the process actually requested. |
-|Cause|Frequent loading and unloading of programs can cause the free memory space to become fragmented into smaller, non-contiguous pieces.|  e.g., if a process requires 8846 bytes but the system allocates a block of 8848 bytes, the extra 2 bytes represent wasted space.|
-Desired Policy | We want an allocation policy that minimizes wasted sapce | It is often more efficient to allocate a slightly larger block of memory rather than creating and managing smaller partitions. |
+
+|                | External Fragmentation | Internal Fragmentation |
+| -------------- | ---------------------- | ---------------------- |
+| **Description**| External fragmentation occurs when there is *enough* total memory to satisfy a request but the available memory is not contiguous.  | Internal fragmentation occurs when memory allocated to a process is slightly larger than what the process actually requested. |
+| **Cause**      | Frequent loading and unloading of programs can cause the free memory space to become fragmented into smaller, non-contiguous pieces. | e.g., if a process requires 8846 bytes but the system allocates a block of 8848 bytes, the extra 2 bytes represent wasted space. |
+| **Desired Policy** | We want an allocation policy that minimizes wasted space. | It is often more efficient to allocate a slightly larger block of memory rather than creating and managing smaller partitions. |
+
 
 ### II. Free Memory Mangement
 Note that thesse techniques to track free memory also applies to storage systems. The memory of the following example is split into small 8-bytes chunks. 
@@ -203,15 +221,16 @@ Most systems implement virtual memory with paging.
     <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap4/5.0PTE.png?raw=true" alt="PTE">
 </figure>
 
-   |     | Definition |
-   | :--------- | :----------- |
-   | Page frame number    | the page frame corresponding to this page, i.e., the actual translation  |
-   | Protection bits | the access permissions of this page (read/write/execute). <br> Can be 1 bit (read/write or read-only) or 3 bits (read, write, execute).  |
-   | Modified/dirty bit |  set to 1 if the page has been modified after being swapped in. <br> This is needed when the OS swaps out a page: if the page is not dirty, the OS does not need to copy it into storage. |
-   | Referenced bit | set to 1 when the page is read from/written to. <br> This is used for page reclamation algorithms to choose which page to evict. |
-   | Supervisor bit    | set to 1 if the page is only accessible in supervisor mode, i.e., by the kernel. <br> A user process accessing a page with this bit set will trigger a fault.|
-   | Present bit | set to 1 if the page is mapped onto a page frame, 0 if it is only on storage. <br> Accessing a page with this bit set to 0 will trigger a page fault to allow the OS to swap the page in.  |
-   | Uncached bit    | set to 1 if the page must not be cached in the CPU caches and always be accessed from/to memory. <br> Used for pages mapping physical devices to avoid using outdated cached values.  
+  |     | Definition |
+  | :--------- | :----------- |
+  | **Page frame number**    | The page frame corresponding to this page, i.e., the actual translation.  |
+  | **Protection bits** | The access permissions of this page (read/write/execute). <br> Can be 1 bit (read/write or read-only) or 3 bits (read, write, execute).  |
+  | **Modified/dirty bit** | Set to 1 if the page has been modified after being swapped in. <br> This is needed when the OS swaps out a page: if the page is not dirty, the OS does not need to copy it into storage. |
+  | **Referenced bit** | Set to 1 when the page is read from/written to. <br> This is used for page reclamation algorithms to choose which page to evict. |
+  | **Supervisor bit**    | Set to 1 if the page is only accessible in supervisor mode, i.e., by the kernel. <br> A user process accessing a page with this bit set will trigger a fault. |
+  | **Present bit** | Set to 1 if the page is mapped onto a page frame, 0 if it is only on storage. <br> Accessing a page with this bit set to 0 will trigger a page fault to allow the OS to swap the page in.  |
+  | **Uncached bit**    | Set to 1 if the page must not be cached in the CPU caches and always be accessed from/to memory. <br> Used for pages mapping physical devices to avoid using outdated cached values. |
+
 
 - The **Memory Management Unit (MMU / 内存管理单元)** is a hardware component that transparently performs address translations.
   - MMU sits between the CPU and the bus to translate virtual addresses into physical addresses, i.e., page $\rightarrow$ page frame.
@@ -311,12 +330,13 @@ The page fault is now resolved. 页码10被映射到新释放的页框
   -  When an virtual address *vaddr* = 0x4041FB is used by the CPU, it goes through the MMU like previously
   - The MMU splits the virtual address int three parts:
 
-    |    | PT1 | PT2 | Offset |
-    | :--- | :----------- | :----------- | :----------- |
-    | Usage |  PT1 is used as an index in the first level page table to find the address of the corresponding second level page table: the Page Table Address (PTA) |  PT2 is used as an index in the second level page table to find the *page frame number* | The physical address *paddr* is built by concatenating the page frame number with the offset. |
-    | Example | 10 bits for the index in the first level page table |10 bits for the index in the level 2 page table |12 bits for the offset in the page <br> 4 kiB = $2^{12}$ Bytes, thus last 12 bits for offset|
+  |       | PT1 | PT2 | Offset |
+  | :---  | :----------- | :----------- | :----------- |
+  | **Usage** | PT1 is used as an index in the first level page table to find the address of the corresponding second level page table: the Page Table Address (PTA). | PT2 is used as an index in the second level page table to find the *page frame number*. | The physical address *paddr* is built by concatenating the page frame number with the offset. |
+  | **Example** | 10 bits for the index in the first level page table. | 10 bits for the index in the level 2 page table. | 12 bits for the offset in the page. <br> 4 kiB = $2^{12}$ Bytes, thus last 12 bits for offset. |
 
-    This lookup process is called a *page walk*. Whenever a virtual address needs to be translated into a physical address (potentially multiple times per instruction), the MMU must perform a page walk to recover the page frame number.
+  This lookup process is called a *page walk*. Whenever a virtual address needs to be translated into a physical address (potentially multiple times per instruction), the MMU must perform a page walk to recover the page frame number.
+
   
  #### (2) Solution for mechanisms to make translation fast - Translation Lookaside Buffer(TLB / 页表缓存)
  ##### (a.) Observation: Most programs frequently reference the same addresses.
