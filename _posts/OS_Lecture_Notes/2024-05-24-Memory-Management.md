@@ -186,9 +186,9 @@ When the OS needs to allocate memory, it iterates on this list searching for a l
 - Worst fit: <br> &nbsp; Exact opposite of best fit: always allocate in the *largest* available hole. <br> &nbsp; The idea is to avoid the internal fragmentation of best fit. <br> &nbsp;In practice, it doesn’t really work well either.
 
 <br> All strategies can be improved with various optimizations:
-- Keeping a separate list for free chunks speeds up search but makes list updates costly / 保持一个单独的空闲块列表
- - Sorting the list to avoid long searches, at the cost of expensive insertions / 对列表进行排序以避免长时间搜索
- - Storing the free list directly in the free chunks themselves / 每个空闲块可以通过内部指针指向下一个空闲块，形成链表
+- Keeping a separate list for free chunks speeds up search but makes list updates costly <br>/ 保持一个单独的空闲块列表
+ - Sorting the list to avoid long searches, at the cost of expensive insertions <br>/ 对列表进行排序以避免长时间搜索
+ - Storing the free list directly in the free chunks themselves <br>/ 每个空闲块可以通过内部指针指向下一个空闲块，形成链表
 
 
 ## 5. Memory Management - The Virtual Memory Abstraction
@@ -294,7 +294,7 @@ The page fault is now resolved. 页码10被映射到新释放的页框
   
 - Kernel memory is shared for ALL address spaces, so it is usually mapped in ALL of them at the same place, with the supervisor bit set to 1 in the PTEs. <br> &nbsp; 
   - If the kernel had its own page table, each system call would require saving the user's page table context, loading the kernel's page table to access the kernel address space, and then switching back to the user's page table and restoring its context after the system call completes. By sharing kernel memory—mapping the kernel address space identically in all user processes' page tables—frequent page table switches are avoided. Thus, system calls only need to switch the CPU mode, not the page tables, thereby improving efficiency.
-  - / 如果内核有自己的页表，每次系统调用都需要先保存用户页表的上下文，然后加载内核页表以访问内核地址空间，系统调用完成后再切换回用户页表，恢复用户页表的上下文。通过共享内核内存，即内核地址空间在所有用户进程的页表中都有相同的映射，减少了频繁的页表切换，系统调用只需要切换运行模式，而不需要切换页表，这样便提高了效率。
+  <br> / 如果内核有自己的页表，每次系统调用都需要先保存用户页表的上下文，然后加载内核页表以访问内核地址空间，系统调用完成后再切换回用户页表，恢复用户页表的上下文。通过共享内核内存，即内核地址空间在所有用户进程的页表中都有相同的映射，减少了频繁的页表切换，系统调用只需要切换运行模式，而不需要切换页表，这样便提高了效率。
 
 ### V. Optimizing Paging Motivation
 #### we may face some major problems:
@@ -338,11 +338,12 @@ The page fault is now resolved. 页码10被映射到新释放的页框
   This lookup process is called a *page walk*. Whenever a virtual address needs to be translated into a physical address (potentially multiple times per instruction), the MMU must perform a page walk to recover the page frame number.
 
   
- #### (2) Solution for mechanisms to make translation fast - Translation Lookaside Buffer(TLB / 页表缓存)
- ##### (a.) Observation: Most programs frequently reference the same addresses.
+#### (2) Solution for mechanisms to make translation fast - Translation Lookaside Buffer(TLB / 页表缓存)
+
+##### (a.) Observation: Most programs frequently reference the same addresses.
 $\Rightarrow$ the obvious solution to our translation speed problem is to use *caching*.
 
- ##### (b.) The MMU usually contains a small associative cache called the Translation Lookaside Buffer. 
+##### (b.) The MMU usually contains a small associative cache called the Translation Lookaside Buffer. 
 It stores for each entry:
 - The mapping from a virtual page number to the corresponding physical page frame number 
 - Valid bit: set to 1 if the entry in the TLB is valid
@@ -354,13 +355,13 @@ It stores for each entry:
       <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap4/5.8TLB.png?raw=true?raw=true" alt="TLB">
   </figure>
 
- ##### (c). When a virtual address *vaddr* goes through the MMU, it follows this path:
+##### (c). When a virtual address *vaddr* goes through the MMU, it follows this path:
 
   <figure>
       <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap4/5.9TLBWorkflow.png?raw=true" alt="TLB Workflow">
   </figure>
 
- ##### (d). Costs of using the TLB
+##### (d). Costs of using the TLB
  Let *ma* be the memory access cost per unit time.
   - If the page table is in memory, the effective memory access (*ema*) cost would be:
     - Search for the corresponding page table entry in the page table: 1 memory access.
@@ -372,7 +373,7 @@ It stores for each entry:
     - The total effective memory access cost is given by:
     <br> ema = p(ma + TLB access) + (1-p)(2ma + TLB access), where *p* is the TLB hit ratio. 
 
- ##### (e).TLB Management
+##### (e).TLB Management
 Most of the TLB management is performed by the MMU:
 - When a TLB entry is loaded from the page table, the necessary metadata are copied into the TLB entry.
 - If the TLB is full when a new entry must be saved, the MMU will evict an entry
