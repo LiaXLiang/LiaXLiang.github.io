@@ -39,16 +39,16 @@
 - The system bus is a communication medium that connects the CPU, memory, and peripherals. It consists of a *data bus*, *address bus*, and *control bus*, which together enable data transfer, address communication, and control signals to flow between the components. 
 
 ## 3. Architectural Features Motivated by OS Services
-|OS Service| Hardware Support|
+| OS Service | Hardware Support |
 |:------------ | -------------:|
-|Protection | Kernel/user mode, protected instructions, base/limit registers|
-|System Calls | Trap instructions and trap vectors|
-|Interrupts | Interrupt vectors|
-|manage I/O devices | Interrupts and memory mapping|
-|Scheduling, error recovery, accounting | Timer|
-|Synchronization | Atomic instructions|
-|Virtual Memory | Translation look-aside buffers
-{: rules="groups"}
+| Protection | Kernel/user mode, protected instructions, base/limit registers |
+| System Calls | Trap instructions and trap vectors |
+| Interrupts | Interrupt vectors |
+| manage I/O devices | Interrupts and memory mapping |
+| Scheduling, error recovery, accounting | Timer |
+| Synchronization | Atomic instructions |
+| Virtual Memory | Translation look-aside buffers|
+
 
 ### I. Protection
 #### Intuition
@@ -89,7 +89,8 @@ Base and limit registers are loaded by the OS before starting a program.
 |:------------ |:-------------| :-------------|
 | **Components** | core OS components + many drivers | applications + some drivers |
 | **Location** | Main Memory <br><br> The kernel encompasses nearly all operating system services. Since it requires direct access to core functionalities, it is essential for the kernel to always reside in main memory to ensure quick access. | - |
-| **Shared vs. Single** | All code executed in kernel mode shares a single virtual address space. A kernel-mode driver does not isolate itself from other kernel mode drivers or the OS itself. | A user mode application is activated <br> $\rightarrow$ The OS creates a process for this application <br> $\rightarrow$ This process provides the application with a private virtual address space and a private handle table, ensuring that one application cannot modify the data of another, as each application operates independently. |
+| **Shared vs. Single** | All code executed in kernel mode shares a single virtual address space. A kernel-mode driver does not isolate itself from other kernel mode drivers or the OS itself. | A user mode application is activated <br> → The OS creates a process for this application <br> → This process provides the application with a private virtual address space and a private handle table, ensuring that one application cannot modify the data of another, as each application operates independently. |
+
 
 Accordingly, we can divide a set of assembly instructions which CPU support into two basic categories: *Regular Instructions*, which can be executed by anyone; and *Privileged Instructions*, which can only be executed by the kernel. The execution of these instructions depends on the type of code running on the processor.
 
@@ -145,13 +146,12 @@ Timer - Accounting and Billing:
 - **Kernel/内核**: The core component of an operating system, responsible for scheduling tasks to be executed on the various cores of the CPU.
  
 ## ⭐️ 4 main types of Kernels
-|  | Monolithic Kernels <br>/ 宏内核 | Microkernel <br>/ 微内核 | Hybrid kernels <br>/ 混合内核 | Unikernels <br>/ 单一内核 |
+|  | Monolithic Kernels <br>/ 宏内核 | Microkernel <br>/ 微内核 | Hybrid kernels <br>/ 混合内核 | Unikernels <br>/ 单一内核|
 |:------------ |:-------------|:-------------|:-------------|:-------------|
-| **Characteristics** | · A monolithic kernel provides, in kernel space, a large amount of core features, e.g., process and memory management, synchronization, file systems, etc., as well as device drivers. <br><br> · Defines a high level interface through system calls. <br><br> · All modules share the same address space and system resources in the kernel. | · A microkernel contains only the minimal set of features needed in kernel space: address-space management, basic scheduling and basic inter-process communication. <br><br> · All other services are pushed in user space as servers: file systems, device drivers, high level interfaces, etc. | · The hybrid kernel architecture sits between *monolithic kernels* and *microkernels*. <br><br> · It is a monolithic kernel where some components have been moved out of kernel space as servers running in user space. <br><br> · While the structure is similar microkernels, i.e., using user servers, hybrid kernels do not provide the same safety guarantees as most components still run in the kernel. | · A unikernel, or *library operating system*, embeds ALL the software in supervisor mode. <br><br> · The kernel as well as all user applications run in the same privileged mode. <br><br> · It is used to build single application operating systems, embedding only the necessary set of applications in a minimal image. |
-| **(+)** | · Good performance when kernel components communicate (regular function calls in kernel space) | · Small memory footprint, making it a good choice for embedded systems <br> · Enhanced safety: when a user space server crashes, it does not crash the whole system <br> · Adaptability: servers can be replaced/updated easily, without rebooting | - | · High performance: system calls become regular function calls and no copies between user and kernel spaces <br> · Security: attack surface is minimized, easier to harden. |
-| **(-)** | · Limited safety: Even separate programs within the kernel operate with the same privileges, increasing the risk of widespread system issues from a single fault. i.e., if one kernel component crashes, the whole system crashes | · Limited performance: IPCs are costly and numerous in such an architecture | - | · Usability: hard to build unikernels due to lack of features supported |
-| **Examples** | · Unix family: BSD, Solaris <br> · Unix-like: Linux <br> · DOS: MS-DOS <br> · Critical embedded systems: Cisco IOS | · Minix <br> · L4 family: seL4, OKL4, sepOS <br> · Mach <br> · Zircon | · Windows NT <br> · XNU (Mach + BSD) | · Unikraft <br> · clickOS <br> · IncludeOS |
-
+| Characteristics| · A monolithic kernel provides, in kernel space, a large amount of core features, e.g., process and memory management, synchronization, file systems, etc., as well as device drivers. <br><br> · Defines a high level interface through system calls. <br><br> · All modules share the same address space and system resources in the kernel. | · A microkernel contains only the minimal set of features needed in kernel space: address-space management, basic scheduling and basic inter-process communication. <br><br> · All other services are pushed in user space as servers: file systems, device drivers, high level interfaces, etc. | · The hybrid kernel architecture sits between *monolithic kernels* and *microkernels*.  <br><br>· It is a monolithic kernel where some components have been moved out of kernel space as servers running in user space.  <br><br>· While the structure is similar microkernels, i.e., using user servers, hybrid kernels do not provide the same safety guarantees as most components still run in the kernel. | · A unikernel, or *library operating system*, embeds ALL the software in supervisor mode. <br><br>· The kernel as well as all user applications run in the same privileged mode. <br><br>· It is used to build single application operating systems, embedding only the necessary set of applications in a minimal image.|
+|(+) | Good performance when kernel components communicate (regular function calls in kernel space) | · Small memory footprint, making it a good choice for embedded systems <br>  ·  Enhanced safety: when a user space server crashes, it does not crash the whole system <br> · Adaptability: servers can be replaced/updated easily, without rebooting | - | · High peformance: system calls become regular function calls and no copies between user and kernel spaces <br> · Security: attack surface is minimized, easier to harden.|
+|(-) | Limited safety: Even separate programs within the kernel operate with the same privileges, increasing the risk of widespread system issues from a single fault. i.e., if one kernel component crashes, the whole system crashes | Limited performance: IPCs are costly and numerous in such an architecture | - | Usability: hard to build unikernels due to lack of features supported|
+|Examples | Unix family: BSD, Solaris <br> Unix-like: Linux <br> DOS: MS-DOS <br>Critical embedded systems: Cisco IOS | Minix <br> L4 family: seL4, OKL4, sepOS <br> Mach <br> Zircon |  Windows NT <br> XNU (Mach + BSD)| Unikraft <br> clickOS <br> IncludeOS
 
 <figure>
     <img src="https://github.com/LiaXLiang/LiaXLiang.github.io/blob/master/assets/img/OS_Lectures/Chap1/04_Kernel_Architectures.png?raw=true" alt="Kernel Architectures">
