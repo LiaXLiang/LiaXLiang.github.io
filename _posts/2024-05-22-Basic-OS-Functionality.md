@@ -40,7 +40,7 @@
 
 ## 3. Architectural Features Motivated by OS Services
 |OS Service| Hardware Support|
------------- | -------------|
+|:------------ | -------------:|
 |Protection | Kernel/user mode, protected instructions, base/limit registers|
 |System Calls | Trap instructions and trap vectors|
 |Interrupts | Interrupt vectors|
@@ -73,7 +73,7 @@ Base and limit registers are loaded by the OS before starting a program.
 <br> *Register* is a dedicated name for **one word of memory** managed by CPU  
 (one word: CPU一次能并行处理的二进制位数)
 |General Purpose Registers/通用目的寄存器 | Special Purpose Registers/特殊目的寄存器
-|------------ | -------------|
+|:------------: | :-------------:|
 |General Purpose Registers are like the *workbench* of a computer, storing temporary data and intermediate results. | Special purpose registers are like a *specialized toolbox*, holding the tools needed to perform specific tasks.
 Data Registers / 数据寄存器<br> ① Store operands and results of calculations. (存储计算的操作数及结果) <br>② The size of data registers is often used to classify processors: 32- or 64-bit processors. | SP / Stack Pointer<br>存储堆栈指针|
 | Address Registers / 地址寄存器 <br> Store memory addresses of operands or instructions | FP / Frame Pointer| 
@@ -82,7 +82,7 @@ Data Registers / 数据寄存器<br> ① Store operands and results of calculati
 
 #### Method(2): Kernel Mode v.s. User Mode
 |   | Kernel Mode | User Mode |
-|------------ | ------------- | -------------|
+|:------------ |:-------------| :-------------|
 |Components | core OS components + many drivers| applications + some drivers
 Location| Main Memory <br><br> The kernel encompasses nearly all operating system services. Since it requires direct access to core functionalities, it is essential for the kernel to always reside in main memory to ensure quick access.|
 | Shared v.s. Single | All code executed in kernel mode shares a single virtual address space. A kernel-mode driver does not isolate itself from other kernel mode drivers or the OS itself. |  A user mode application is activated <br> $\rightarrow$ The OS creates a process for this application <br> $\rightarrow$ This process provides the application with a private virtual address space and a private handle table, ensuring that one application cannot modify the data of another, as each application operates independently.|
@@ -142,7 +142,7 @@ Timer - Accounting and Billing:
  
 ## ⭐️ 4 main types of Kernels
 |  | Monolithic Kernels <br>/ 宏内核 | Microkernel <br>/ 微内核 | Hybrid kernels <br>/ 混合内核 | Unikernels <br>/ 单一内核|
-|------------ | ------------- | ------------- | ------------- | ------------- |
+|:------------ |:-------------|:-------------|:-------------|:-------------|
 | Characteristics| · A monolithic kernel provides, in kernel space, a large amount of core features, e.g., process and memory management, synchronization, file systems, etc., as well as device drivers. <br><br> · Defines a high level interface through system calls. <br><br> · All modules share the same address space and system resources in the kernel. | · A microkernel contains only the minimal set of features needed in kernel space: address-space management, basic scheduling and basic inter-process communication. <br><br> · All other services are pushed in user space as servers: file systems, device drivers, high level interfaces, etc. | · The hybrid kernel architecture sits between *monolithic kernels* and *microkernels*.  <br><br>· It is a monolithic kernel where some components have been moved out of kernel space as servers running in user space.  <br><br>· While the structure is similar microkernels, i.e., using user servers, hybrid kernels do not provide the same safety guarantees as most components still run in the kernel. | · A unikernel, or *library operating system*, embeds ALL the software in supervisor mode. <br><br>· The kernel as well as all user applications run in the same privileged mode. <br><br>· It is used to build single application operating systems, embedding only the necessary set of applications in a minimal image.|
 |(+) | Good performance when kernel components communicate (regular function calls in kernel space) | · Small memory footprint, making it a good choice for embedded systems <br>  ·  Enhanced safety: when a user space server crashes, it does not crash the whole system <br> · Adaptability: servers can be replaced/updated easily, without rebooting | - | · High peformance: system calls become regular function calls and no copies between user and kernel spaces <br> · Security: attack surface is minimized, easier to harden.|
 |(-) | Limited safety: Even separate programs within the kernel operate with the same privileges, increasing the risk of widespread system issues from a single fault. i.e., if one kernel component crashes, the whole system crashes | Limited performance: IPCs are costly and numerous in such an architecture | - | Usability: hard to build unikernels due to lack of features supported|
