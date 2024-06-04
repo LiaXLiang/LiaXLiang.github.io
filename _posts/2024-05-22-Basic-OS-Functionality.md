@@ -47,7 +47,8 @@
 |manage I/O devices | Interrupts and memory mapping|
 |Scheduling, error recovery, accounting | Timer|
 |Synchronization | Atomic instructions|
-|Virtual Memory | Translation look-aside buffers|
+|Virtual Memory | Translation look-aside buffers
+{: rules="groups"}
 
 ### I. Protection
 #### Intuition
@@ -85,7 +86,7 @@ Data Registers / 数据寄存器<br> ① Store operands and results of calculati
 |:------------ |:-------------| :-------------|
 |Components | core OS components + many drivers| applications + some drivers
 Location| Main Memory <br><br> The kernel encompasses nearly all operating system services. Since it requires direct access to core functionalities, it is essential for the kernel to always reside in main memory to ensure quick access.|
-| Shared v.s. Single | All code executed in kernel mode shares a single virtual address space. A kernel-mode driver does not isolate itself from other kernel mode drivers or the OS itself. |  A user mode application is activated <br> $\rightarrow$ The OS creates a process for this application <br> $\rightarrow$ This process provides the application with a private virtual address space and a private handle table, ensuring that one application cannot modify the data of another, as each application operates independently.|
+| Shared v.s. Single | All code executed in kernel mode shares a single virtual address space. A kernel-mode driver does not isolate itself from other kernel mode drivers or the OS itself. |  A user mode application is activated <br> $\rightarrow$ The OS creates a process for this application <br> $\rightarrow$ This process provides the application with a private virtual address space and a private handle table, ensuring that one application cannot modify the data of another, as each application operates independently.
 
 Accordingly, we can divide a set of assembly instructions which CPU support into two basic categories: *Regular Instructions*, which can be executed by anyone; and *Privileged Instructions*, which can only be executed by the kernel. The execution of these instructions depends on the type of code running on the processor.
 
