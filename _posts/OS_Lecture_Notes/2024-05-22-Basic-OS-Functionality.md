@@ -39,15 +39,31 @@
 - The system bus is a communication medium that connects the CPU, memory, and peripherals. It consists of a *data bus*, *address bus*, and *control bus*, which together enable data transfer, address communication, and control signals to flow between the components. 
 
 ## 3. Architectural Features Motivated by OS Services
-| OS Service | Hardware Support |
-|:------------ | -------------:|
-| Protection | Kernel/user mode, protected instructions, base/limit registers |
-| System Calls | Trap instructions and trap vectors |
-| Interrupts | Interrupt vectors |
-| manage I/O devices | Interrupts and memory mapping |
-| Scheduling, error recovery, accounting | Timer |
-| Synchronization | Atomic instructions |
-| Virtual Memory | Translation look-aside buffers|
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+</style>
+| OS Service                         | Hardware Support                                              |
+|:-----------------------------------|--------------------------------------------------------------:|
+| Protection                         | Kernel/user mode, protected instructions, base/limit registers|
+| System Calls                       | Trap instructions and trap vectors                            |
+| Interrupts                         | Interrupt vectors                                             |
+| manage I/O devices                 | Interrupts and memory mapping                                 |
+| Scheduling, error recovery, accounting | Timer                                                      |
+| Synchronization                    | Atomic instructions                                           |
+| Virtual Memory                     | Translation look-aside buffers                                |
+
 
 
 ### I. Protection
