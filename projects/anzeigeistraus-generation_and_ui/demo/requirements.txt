@@ -1,0 +1,8 @@
+django
+langchain
+chromadb
+langgraph
+langchain-huggingface
+langchain-chroma
+langchain-openai
+markdown

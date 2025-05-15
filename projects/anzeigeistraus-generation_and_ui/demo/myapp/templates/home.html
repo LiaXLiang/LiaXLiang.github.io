@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnzeigeIstRaus</title>
+    {% load static %}
+    <style>
+      body {
+        font-family: "Poppins", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #242121;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      main {
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .chatbox {
+        width: 100%;
+        min-height: 40px;
+        padding: 20px;
+        box-sizing: border-box;
+        resize: none;
+        border-radius: 25px;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        background-color: #424242;
+        color: #ffffff;
+      }
+
+      textarea {
+        width: 90%;
+        margin-right: 500px;
+        min-height: 40px;
+        box-sizing: border-box;
+        resize: none;
+        border: none;
+        border-radius: 4px;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        background-color: #424242;
+        color: #ffffff;
+      }
+
+      textarea:focus {
+        border: none;
+      }
+
+      main p {
+        font-size: 1.2em;
+        margin: 20px 0;
+      }
+
+      footer {
+        background-color: #d4af37;
+        color: white;
+        padding: 10px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 0.9em;
+      }
+
+      .functional-btn {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      button {
+        width: 40px;
+        height: 40px;
+        background-color: #353535;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #d4af37;
+        transform: scale(1.1);
+      }
+
+      button:active {
+        transform: scale(1);
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #353535;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      /* Sidebar links */
+      .sidebar-title {
+        font-family: "Prachason Neue", sans-serif;
+      }
+
+      .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        background-color: #424242;
+        transition: background-color 0.3s ease;
+      }
+
+      .sidebar a:hover {
+        background-color: #d4af37;
+      }
+
+      .chat-history {
+        padding-top: 330px;
+        padding-bottom: 330px;
+      }
+
+      /* Main content area */
+      .content {
+        margin-left: 250px;
+        padding: 20px;
+        width: 100%;
+        background-color: #ecf0f1;
+      }
+
+      h1 {
+        color: #2c3e50;
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="logo">
+        <img
+          class="logo_icon"
+          src="{% static 'images/AnzeigeIstRausTransparent_v4.png' %}"
+          alt="Logo Image"
+        />
+        <p>Ihr bester deutscher Rechtsassistent.</p>
+      </section>
+      <section class="chatbox">
+        <form method="post" action="{% url 'process_query' %}">
+          {% csrf_token %}
+          <textarea
+            name="query"
+            class="chat-input"
+            placeholder="Was kann ich für Sie tun?"
+          ></textarea>
+          <div class="functional-btn">
+            <button type="submit">&#8593;</button>
+          </div>
+        </form>
+      </section>
+
+      {% if error_message %}
+      <div class="error-message">{{ error_message }}</div>
+      {% endif %}
+    </main>
+
+    <div class="sidebar">
+      <h2 class="sidebar-title">AnzeigeIstRaus</h2>
+      <a href="#">Neuer Chat</a>
+      <p class="chat-history">Noch kein Chatverlauf.</p>
+      <a href="#">Chatverlauf löschen</a>
+    </div>
+
+    <footer>
+      <p>
+        &copy;2025 AnzeigeIstRaus - SPP : Building LLM Applications Group 2 -
+        RWTH Aachen University
+      </p>
+    </footer>
+  </body>
+</html>
