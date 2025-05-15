@@ -17,10 +17,11 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://eu.api.smith.langchain.com"
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_PROJECT"] = "4omini_Version"
-
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+
 os.environ["AZURE_OPENAI_API_KEY"]= os.getenv("AZURE_OPENAI_KEY") 
+os.environ["AZURE_OPENAI_ENDPOINT"] = "https://gpt-dbis.openai.azure.com"
 os.environ["OPENAI_API_TYPE"] = "azure"
 os.environ["OPENAI_API_VERSION"] = "2024-08-01-preview"
 
