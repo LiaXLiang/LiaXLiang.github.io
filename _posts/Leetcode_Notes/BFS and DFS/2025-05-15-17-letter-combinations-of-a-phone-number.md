@@ -32,14 +32,14 @@ categories: [Leetcode_Notes, BFS/DFS]
         **Step 0: Initialize**
 
         Queue: [""]
-        -------------------------------
+        -----------------------------------------------------------
 
         **Step 1: Process digit = '2' → letters = "abc"**
         
         Initial queue size = 1
         Dequeue "" and append each letter in "abc": → "a", "b", "c"
         Updated Queue: ["a", "b", "c"]
-        ---------------------------
+        -----------------------------------------------------------
 
         **Step 2: Process digit = '4' → letters = "ghi"**
         Initial queue size = 3
@@ -51,7 +51,7 @@ categories: [Leetcode_Notes, BFS/DFS]
 
         Updated Queue:  
         ["ag", "ah", "ai", "bg", "bh", "bi", "cg", "ch", "ci"]
-        -------------------------------
+        -----------------------------------------------------------
 
         **Step 3: Process digit = '9' → letters = "wxyz"**
         Initial queue size = 9
