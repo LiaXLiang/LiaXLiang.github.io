@@ -7,7 +7,7 @@ permalink: /posts/note-index-leetcode/
 <style>
 /* 控制 summary 的折叠箭头与字体大小 */
 details > summary {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
   font-weight: bold;
   cursor: pointer;
   list-style: none;
