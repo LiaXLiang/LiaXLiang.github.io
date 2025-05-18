@@ -187,6 +187,15 @@ class Solution {
     }
 }
 ```
+```
+**Time Complexity:** \( O(3^M \times 4^N) \)
+
+**Space Complexity:**  \( O(3^M \times 4^N) \)
+
+Where:  
+- M: number of digits mapping to 3 letters  
+- N: number of digits mapping to 4 letters  
+```
 
 ```
 Input: "29"
