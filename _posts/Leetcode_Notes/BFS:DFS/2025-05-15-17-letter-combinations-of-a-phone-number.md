@@ -1,3 +1,9 @@
+---
+title: 17 Letter Combinations Of A Phone Number
+date: 2025-05-15
+categories: [Leetcode_Notes, BFS/DFS]
+---
+
 # I. BFS Queue-Based Approach
 
 ### We treat the process of building combinations as a breadth-first traversal: 
@@ -196,6 +202,7 @@ Where:
 - M: number of digits mapping to 3 letters  
 - N: number of digits mapping to 4 letters  
 ```
+
 
 ```text
 Input: "29"
