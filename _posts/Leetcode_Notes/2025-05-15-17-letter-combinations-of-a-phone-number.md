@@ -114,9 +114,9 @@
     }
 ```
 ```
-**Time Complexity:** \( O(3^M \times 4^N) \)
+**Time Complexity:** O(3^M * 4^N)
 
-**Space Complexity:**  \( O(3^M \times 4^N) \)
+**Space Complexity:**  O(3^M * 4^N)
 
 Where:  
 - M: number of digits mapping to 3 letters  
@@ -188,16 +188,16 @@ class Solution {
 }
 ```
 ```
-**Time Complexity:** \( O(3^M \times 4^N) \)
+**Time Complexity:**  O(3^M * 4^N)
 
-**Space Complexity:**  \( O(3^M \times 4^N) \)
+**Space Complexity:**  O(3^M * 4^N)
 
 Where:  
 - M: number of digits mapping to 3 letters  
 - N: number of digits mapping to 4 letters  
 ```
 
-```
+```text
 Input: "29"
 
 1. initial call: backtrack(phone, combinations, "29", "")
@@ -241,3 +241,4 @@ Input: "29"
            ├─ backtrack("", "cx") → combinations = [..., "cx"]
            ├─ backtrack("", "cy") → combinations = [..., "cy"]
            └─ backtrack("", "cz") → combinations = [..., "cz"]
+```
