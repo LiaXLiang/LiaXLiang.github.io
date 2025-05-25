@@ -22,7 +22,7 @@ We solve this problem using BFS starting *simultaneously* from **all initially r
 
 
 ### Solution
-
+{% raw %}
 ```java
 class Solution {
     public int orangesRotting(int[][] grid) {
@@ -91,3 +91,4 @@ class Solution {
     }
 }
 ```
+{% endraw %}
