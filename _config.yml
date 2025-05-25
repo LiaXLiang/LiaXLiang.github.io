@@ -64,8 +64,8 @@ linkedin:           "https://www.linkedin.com/in/haoxuan-liang-04b045232/"
 #xmpp:              username@server.com
 #hackernews:        username
 
-# Gems
-gems:
+
+plugins:
   - jekyll-mentions
   - jekyll-feed
   - jekyll-sitemap
