@@ -120,9 +120,9 @@ categories: [Leetcode_Notes, BFS and DFS]
     }
 ```
 ```
-**Time Complexity:** O(3^M * 4^N)
+Time Complexity: O(3^M * 4^N)
 
-**Space Complexity:**  O(3^M * 4^N)
+Space Complexity:  O(3^M * 4^N)
 
 Where:  
 - M: number of digits mapping to 3 letters  
@@ -194,9 +194,9 @@ class Solution {
 }
 ```
 ```
-**Time Complexity:**  O(3^M * 4^N)
+Time Complexity: O(3^M * 4^N)
 
-**Space Complexity:**  O(3^M * 4^N)
+Space Complexity: O(3^M * 4^N)
 
 Where:  
 - M: number of digits mapping to 3 letters  

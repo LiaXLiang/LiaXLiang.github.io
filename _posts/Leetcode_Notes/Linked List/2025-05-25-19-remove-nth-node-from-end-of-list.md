@@ -60,6 +60,11 @@ class Solution {
     }
 }
 ```
+```
+Time Complexity: O(N)
+Space Complexity: O(1)
+```
+
 ### Should I use ```while (node)``` or ```while (node.next)``` in my loop?
 - (1) ```while (node)```
    - **while (node)** checks if ***the current node exists***. It raverse all nodes, including the last node
