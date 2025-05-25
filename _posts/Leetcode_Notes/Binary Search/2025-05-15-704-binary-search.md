@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 704 Binary Search
 date: 2025-05-15
 categories: [Leetcode_Notes, Binary Search]

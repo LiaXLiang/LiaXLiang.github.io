@@ -29,7 +29,7 @@ details[open] > summary::before {
 
 /* 链接样式 */
 .leetcode-link a {
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   text-decoration: underline;
   color: #333;
   transition: color 0.2s ease;
@@ -42,8 +42,8 @@ details[open] > summary::before {
 
 # 📗 Leetcode Notes
 
-{% assign lc_notes = site.posts | where_exp: "item", "item.path contains 'Leetcode_Notes'" | sort: "date" | reverse %}
-{% assign grouped = lc_notes | group_by_exp: "post", "post.path | split: '/' | slice: 2, 1 | first" %}
+{% assign lc_notes = site.posts | where_exp: "item", "item.categories contains 'Leetcode_Notes'" | sort: "date" | reverse %}
+{% assign grouped = lc_notes | group_by_exp: "post", "post.categories[1]" %}
 
 {% for group in grouped %}
   <details>
@@ -55,5 +55,6 @@ details[open] > summary::before {
     </ul>
   </details>
 {% endfor %}
+
 
 <p><a href="/posts/">⬅ Back to Notes Index</a></p>

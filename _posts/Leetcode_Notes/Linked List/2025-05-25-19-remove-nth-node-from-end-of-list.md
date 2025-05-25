@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 19. Remove Nth Node From End of List
 date: 2025-05-25
 categories: [Leetcode_Notes, Linked List]

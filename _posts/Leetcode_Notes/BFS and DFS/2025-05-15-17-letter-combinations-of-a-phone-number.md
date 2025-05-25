@@ -1,7 +1,8 @@
 ---
+layout: post
 title: 17 Letter Combinations Of A Phone Number
 date: 2025-05-15
-categories: [Leetcode_Notes, BFS/DFS]
+categories: [Leetcode_Notes, BFS and DFS]
 ---
 
 # I. BFS Queue-Based Approach

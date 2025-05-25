@@ -1,7 +1,8 @@
 ---
+layout: post
 title: 994 Rotting Oranges
 date: 2025-05-20
-categories: [Leetcode_Notes, BFS/DFS]
+categories: [Leetcode_Notes, BFS and DFS]
 ---
 We solve this problem using BFS starting *simultaneously* from **all initially rotten oranges at minute 0**.
 
