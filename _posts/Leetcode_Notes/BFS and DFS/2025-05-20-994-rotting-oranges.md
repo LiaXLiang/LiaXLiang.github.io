@@ -22,7 +22,8 @@ We solve this problem using BFS starting *simultaneously* from **all initially r
 
 
 ### Solution
-```Java
+
+```java
 class Solution {
     public int orangesRotting(int[][] grid) {
         Queue<int[]> queue = new LinkedList<>(); 
