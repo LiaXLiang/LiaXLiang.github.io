@@ -41,7 +41,7 @@ details[open] > summary::before {
 </style>
 
 # 📗 Leetcode Notes
-
+<!-- 
 {% assign lc_notes = site.posts | where_exp: "item", "item.categories contains 'Leetcode_Notes'" | sort: "date" | reverse %}
 {% assign grouped = lc_notes | group_by_exp: "post", "post.categories[1]" %}
 
@@ -54,7 +54,8 @@ details[open] > summary::before {
       {% endfor %}
     </ul>
   </details>
-{% endfor %}
+{% endfor %} -->
 
+{% include leetcode_tree.html %}
 
 <p><a href="/posts/">⬅ Back to Notes Index</a></p>
