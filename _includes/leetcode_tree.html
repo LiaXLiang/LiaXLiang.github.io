@@ -1,0 +1,51 @@
+{% assign posts = site.posts | where_exp: "item", "item.categories contains 'Leetcode_Notes'" %}
+{% assign tree = {} %}
+
+{% for post in posts %}
+  {% assign path = post.categories[1] | split: '/' %}
+  {% capture p0 %}{{ path[0] }}{% endcapture %}
+  {% capture p1 %}{{ path[1] | default: '' }}{% endcapture %}
+  {% capture p2 %}{{ path[2] | default: '' }}{% endcapture %}
+
+  {% unless tree[p0] %}{% assign tree = tree | merge: {{ p0 | jsonify }}: {} %}{% endunless %}
+  {% if p1 != '' %}
+    {% unless tree[p0][p1] %}{% assign tree[p0] = tree[p0] | merge: {{ p1 | jsonify }}: {} %}{% endunless %}
+    {% if p2 != '' %}
+      {% unless tree[p0][p1][p2] %}{% assign tree[p0][p1] = tree[p0][p1] | merge: {{ p2 | jsonify }}: [] %}{% endunless %}
+      {% assign tree[p0][p1][p2] = tree[p0][p1][p2] | push: post %}
+    {% else %}
+      {% assign tree[p0][p1] = tree[p0][p1] | push: post %}
+    {% endif %}
+  {% else %}
+    {% assign tree[p0] = tree[p0] | push: post %}
+  {% endif %}
+{% endfor %}
+
+<p><a href="/posts/">⬅ Back to Notes Index</a></p>
+
+<ul>
+{% for p0 in tree %}
+  <details>
+    <summary>{{ p0[0] }}</summary>
+    <ul>
+      {% assign group1 = p0[1] %}
+      {% for p1 in group1 %}
+        {% if p1[1] contains 'title' %}
+          <li><a href="{{ p1[1].url }}">{{ p1[1].title }}</a></li>
+        {% else %}
+        <details>
+          <summary>{{ p1[0] }}</summary>
+          <ul>
+            {% for p2 in p1[1] %}
+              {% if p2.title %}
+                <li><a href="{{ p2.url }}">{{ p2.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </details>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </details>
+{% endfor %}
+</ul>
