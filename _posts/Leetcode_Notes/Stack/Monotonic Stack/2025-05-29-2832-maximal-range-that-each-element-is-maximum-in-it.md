@@ -8,11 +8,11 @@ categories:
 ---
 
 ### Why Monotonic Stack?
-####
+
 When a problem involves identifying the nearest greater or smaller element to the left or right, that's a strong indicator that a monotonic stack should be used. In this particular task, we are asked to find the range in which each element is the maximum — a condition that naturally lends itself to the monotonic stack.
 
 ### Revisiting the Monotonic Stack with an Example
-####
+
 Let’s review what happens in a **monotonic increasing stack** scenario, where the elements are arranged in increasing order from top to bottom. We'll iterate through the array from right to left, because we’re trying to find for each element the nearest element greater than it on the right.
 
 ```java
