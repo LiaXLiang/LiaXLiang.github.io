@@ -41,6 +41,7 @@ The key is how to implement this efficiently and cleanly.
     - If color == 'W', then 'W' ^ 'B' ^ 'W' → 'B'
 
 ### Solution
+{% raw %}
 ```java
 class Solution {
     private static final int[][] DIRS = {{1,0},{1,1},{0,1},{-1,1},
@@ -83,6 +84,7 @@ class Solution {
     }
 }
 ```
+{% endraw %}
 
 ```
 Time Complexity: O(M+N)
