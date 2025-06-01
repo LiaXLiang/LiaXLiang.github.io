@@ -5,7 +5,7 @@ categories: [Leetcode_Notes, HashMap]
 ---
 
 ### Why HashMap?
-When we see the problem - "g**roup the anagrams together**" - our immediate question is: "What does it mean for strings to be grouped together?"
+When we see the problem - "**group the anagrams together**" - our immediate question is: "What does it mean for strings to be grouped together?"
 
 That implies we need some way to **classify** or **categorize** strings that are *somehow equivalent*. Specifically, strings that are anagrams of each other should be placed into the same group.
 
@@ -70,7 +70,7 @@ For each input strings in 'strs':
     - converting to a char array: O(k)
     - sorting the array: O(klogk)
     - creating a string key: O(k)
-    - => Per string O(klogk)
+    => Per string O(klogk)
 Therefore, the total time complexity is O(n·klogk)
 
 Space Complexity: O(Nk)
