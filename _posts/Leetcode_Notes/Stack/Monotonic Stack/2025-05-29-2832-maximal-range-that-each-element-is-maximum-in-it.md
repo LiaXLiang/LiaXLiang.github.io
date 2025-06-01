@@ -156,5 +156,5 @@ Time Complexity: O(N)
   Processes the remaining elements in the stack. Each element is popped once, which also takes O(n) in total.
 
 Space Complexity: O(N)
-The algorithm uses a stack Stack<Integer> s to store indices. In the worst case (e.g., a strictly decreasing array), all elements could be pushed onto the stack.
+- The algorithm uses a stack Stack<Integer> s to store indices. In the worst case (e.g., a strictly decreasing array), all elements could be pushed onto the stack.
 ```
