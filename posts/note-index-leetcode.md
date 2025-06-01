@@ -57,4 +57,4 @@ details[open] > summary::before {
 {% endfor %}
 
 
-<p><a href="/posts/">⬅ Back to Notes Index</a></p>
+<p><a href="/posts/leetcode_notes/">⬅ Back to Leetcode Notes</a></p>
