@@ -103,6 +103,20 @@ class Solution {
     }
 }
 ```
+#### Implementation Note
+```java
+Arrays.sort(arrivals, Comparator.comparingInt(a -> a[0]))
+```
+- It sorts the 2D array *arrivals* in ascending order of the first element in each sub-array. 
+- ```a -> a[0]```
+  - is a lambda expression. It takes one parameter *a*, which is an **int[] array**, and returns its first element a[0] for comparison.
+- ```public static <T> void Arrays.sort(T[] a, Comparator<? super T> c)``` 
+  - ```Arrays.sort(...)``` 
+    - is a *static* method from the ```java.util.Arrays``` class. It sorts an array in-place.
+  - The first parameter *a*
+    - is **an array of type T**, i.e., the array to be sorted.
+  - ```Comparator<? super T> c``` 
+    - is a functional interface that defines how elements of type T should be compared. ```? super T``` means the comparator can compare objects of type T or any of its supertypes, making it more flexible.
 
 ```
 Time Complexity: O(NlogN)
