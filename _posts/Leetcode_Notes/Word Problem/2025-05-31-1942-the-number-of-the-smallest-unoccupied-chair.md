@@ -107,19 +107,19 @@ Time Complexity: O(NlogN)
 
 Let N be the number of friends:
 - Initialization of the heap with n chairs: 
-    · O(N);
+    - O(N);
 - Constructing arrival and leave event arrays,
-    · i.e., a single pass through the times-array: O(N);
+    - i.e., a single pass through the times-array: O(N);
 - Sorting the arrival and leave arrays: 
-    · O(NlogN) for each 
+    - O(NlogN) for each 
     -> O(NlogN);
 - Main simulation loop over arrivals: 
-    · <i> We iterate through n arrivals. 
-    · <ii> For each arrival, we may process multiple departures. 
-    · <iii> Each heap operation (poll or offer) takes O(logN).
-    · <iv> Since each friend arrives and leaves once, we perform at most: 
+    - <i> We iterate through n arrivals. 
+    - <ii> For each arrival, we may process multiple departures. 
+    - <iii> Each heap operation (poll or offer) takes O(logN).
+    - <iv> Since each friend arrives and leaves once, we perform at most: 
         n heap insertions + n heap removals
-    · the total heap constuction operation cost is O(NlogN)
+    - the total heap constuction operation cost is O(NlogN)
 - Total Time Complexity: O(NlogN)
 
 Space Complexity: O(N)
