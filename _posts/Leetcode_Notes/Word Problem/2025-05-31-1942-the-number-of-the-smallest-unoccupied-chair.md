@@ -32,10 +32,11 @@ This approach simulates the system by **processing events in chronological order
   
 ### 📌 Algorithm
 - (1) Initialize the min-heap with all seat numbers: 0 to n-1.
-- (2) - Create two arrays `arrivals[][]` and `leaves[][]`, each storing `[time, friend_id]`.
+- (2) Create two arrays `arrivals[][]` and `leaves[][]`, each storing `[time, friend_id]`.
    - Sort both arrays by time (ascending).
 - (3) **Simulate each arrival** in order:
-   - Before handling the current arrival, **process all friends who have already left** (i.e., whose leave time ≤ current time):
+   - Before handling the current arrival, **process all friends who have already left** 
+   - i.e., whose leave time ≤ current time
      - For each such friend:
        - Look up their seat in the hashmap.
        - Return the seat to the min-heap.
