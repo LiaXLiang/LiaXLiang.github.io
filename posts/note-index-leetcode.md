@@ -57,4 +57,14 @@ details[open] > summary::before {
 {% endfor %}
 
 
-<p><a href="/posts/leetcode_notes/">⬅ Back to Leetcode Notes</a></p>
+<!-- <p><a href="/posts/leetcode_notes/">⬅ Back to Leetcode Notes</a></p> -->
+
+{% if page.categories contains 'Leetcode_Notes' %}
+  <a href="/posts/leetcode_notes/">
+    ⬅ Back to Leetcode Notes
+  </a>
+{% else %}
+  <a href="/posts/">
+    ⬅ Back to Notes Index
+  </a>
+{% endif %}
