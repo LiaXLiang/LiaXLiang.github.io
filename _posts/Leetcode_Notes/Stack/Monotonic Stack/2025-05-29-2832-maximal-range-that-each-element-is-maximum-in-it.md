@@ -157,3 +157,4 @@ Time Complexity: O(N)
 
 Space Complexity: O(N)
 The algorithm uses a stack Stack<Integer> s to store indices. In the worst case (e.g., a strictly decreasing array), all elements could be pushed onto the stack.
+```
