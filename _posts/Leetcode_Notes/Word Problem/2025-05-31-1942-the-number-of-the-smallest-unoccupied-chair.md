@@ -131,3 +131,4 @@ Space Complexity: O(N)
 - Chair assignment map stores up to n entries (friend → chair)
     - O(N)
 - Total Space Complexity: O(N)
+```
