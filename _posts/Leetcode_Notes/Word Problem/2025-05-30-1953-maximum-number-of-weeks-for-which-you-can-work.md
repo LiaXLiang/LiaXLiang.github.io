@@ -21,7 +21,7 @@ Let’s define the following:
 - ```total``` = total number of tasks = sum(milestones)
 - ```max``` = maximum number of tasks in a single project = max(milestones)
 
-- ```rest``` = total number of tasks in all **other** projects = total - max
+- ```rest``` = total number of tasks in **all other** projects = total - max
 
 ### Case Analysis
 - Case 1: rest ≥ max - 1

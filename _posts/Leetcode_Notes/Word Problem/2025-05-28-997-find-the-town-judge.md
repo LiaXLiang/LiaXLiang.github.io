@@ -4,7 +4,7 @@ date: 2025-05-28
 categories: [Leetcode_Notes, Word Problem]
 ---
 
-### 📌 Algorithm:
+### 📌 Algorithm
 To efficiently determine who the judge is (if any), we assign each person a trust-score using an array trustScore of size *n + 1*. We use *n + 1* so that we can conveniently map person i to ```trustScore[i]```, avoiding off-by-one index confusion.
 
 We then iterate over the trust array:

@@ -103,7 +103,6 @@ We only pop from the stack when the **```current element``` > ```stack top```**.
   - The next element in the stack **after pop** is the first greater element on the right.
 
 ### Final Stack — After All Elements Are Processed
-####
 Now consider an ascending input:
 ```java
 nums = [1, 2, 3, 4, 5]
