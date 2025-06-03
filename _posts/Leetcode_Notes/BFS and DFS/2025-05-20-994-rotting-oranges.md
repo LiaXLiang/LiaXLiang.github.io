@@ -5,7 +5,7 @@ categories: [Leetcode_Notes, BFS and DFS]
 ---
 We solve this problem using BFS starting *simultaneously* from **all initially rotten oranges at minute 0**.
 
-### 📌 Algorithm Steps
+### 📌 Algorithm
 - (1) Initialize the Queue with Rotten Oranges (Minute 0):
     - Traverse the grid and enqueue the positions of all initially rotten oranges. These serve as the BFS starting points. 
   
