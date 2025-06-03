@@ -193,8 +193,8 @@ Where:
     ```
 
 # 
-Each recursive call peels off one digit and tries all corresponding letters.
 
+Each recursive call peels off one digit and tries all corresponding letters.
 
 - e.g.
     ```text
