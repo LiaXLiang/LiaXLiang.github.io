@@ -140,7 +140,23 @@ Inorder traversal of a BST should produce **a strictly increasing sequence of va
 #### Class-level variable
 The pre variable must be declared outside the recursive function, so its value is retained across the recursion calls.
 
+### Solution
+```java
+class Solution {
+    private long pre = Long.MIN_VALUE;
+
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+
+        if(!isValidBST(root.left)) return false;
+
+        if(root.val <= pre) return false;
+
+        pre = root.val;
+        return isValidBST(root.right);
+    }
+}
+```
 
 
-
-# III. 后序遍历： 左-右-中 先递归，再判断
+# III. Postorder Traversal
