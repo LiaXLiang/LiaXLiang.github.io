@@ -5,7 +5,7 @@ categories: [Leetcode_Notes, Tree Traversal]
 ---
 
 # I. Preorder Traversal 
-# Node → Left → Right, validate before recursion
+# Root → Left → Right, validate before recursion
 ### A valid BST is defined as follows:
 - The **left** subtree of a node contains only nodes with keys **less than** the node's key.
 - The **right** subtree of a node contains only nodes with keys **greater than** the node's key.
@@ -114,8 +114,8 @@ Using int bounds would cause for example the test case ```[2147483647]```, where
 <br>
 
 # II. Inorder Traversal
-# Left → Node → Right
-Inorder traversal of a BST should produce **a strictly increasing sequence of values**.  This allows us to validate the BST property by simply checking whether each current node value is greater than the previous one.
+# Left → Root → Right
+Inorder traversal of a **BST** should produce **a strictly increasing sequence of values**.  This allows us to validate the BST property by simply checking whether each current node value is greater than the previous one.
 
 ### Algorithm Logic
 1. **Define the function signature**
