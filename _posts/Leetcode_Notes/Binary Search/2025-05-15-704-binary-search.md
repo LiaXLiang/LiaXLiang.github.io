@@ -5,11 +5,11 @@ categories: [Leetcode_Notes, Binary Search]
 ---
 
 # Binary Search
-A binary search algorithm works by repeatedly dividing **the sorted array** in half until the desired element is found or until the entire array is exausted. 
+A binary search algorithm works by repeatedly dividing **the sorted array** in half until the desired element is found or until the entire array is exhausted. 
 
-Binary search involves many boundary conditions, the logic behind it is simple but rather sophisticated. For example:
+Binary search appears simple, but implementing it correctly often involves subtle boundary conditions. For example:
 - Should the loop be ```while (left < right)``` or ```while (left <= right)```?
-- Should we update ```right == middle```, or ```right == midddle -1```? 
+- Should we update ```right == middle```, or ```right == middle -1```? 
 - What happens when ```left == right```?
 
 The key to these confusions is <font color = red> the definition of the search interval </font>.
@@ -17,7 +17,7 @@ The key to these confusions is <font color = red> the definition of the search i
 
 
 ### Core Principle: Interval Definition
-Binary search must preserve a strict invariant: at every iteration, the target must reside within a well-defined interval. Two standard interval definitions are:
+Binary search must preserve a strict **invariant**: at every iteration, the target must reside within a well-defined interval. Two standard interval definitions are:
 - Left-closed, right-closed: ```[left, right]```
 - Left-closed, right-open: ```[left, right)```
 
@@ -38,17 +38,17 @@ In this version, both ```left``` and ```right``` are valid candidate indices —
 
   1. Invariant Maintained:
      - ```target ∈ [left, right]```
-  2. Loop Condition:  
+  2. Initialization:
+     - ```left = 0```, ```right = nums.length - 1``` — both inclusive.
+  3. Loop Condition:  
      - <font color = red> **while (left <= right)**</font>
-  3. When ```left == right```:
+  4. When ```left == right```:
      - the single element at that index is still valid and must be checked.
   5. Pointer Update Rules:
      - If ```nums[middle] > target```: 
-       - Eliminate the right half **including middle**, search in ```[left, middle - 1]```
-       - ```right = middle - 1;```
+       - Eliminate the right half **including middle**, set ```right = middle - 1;```
      - If ```nums[middle] < target```:
-       - Eliminate the left half **including middle**, search in ```[middle + 1, right]```
-       - ```left = middle + 1;```
+       - Eliminate the left half **including middle**, set ```left = middle + 1;```
   
 | index:    | 0   | 1   | 2   |
 |  :--:     | :--:| :--: | :--:|
@@ -94,19 +94,19 @@ In this version, ```left``` is inclusive and ```right``` is exclusive. The eleme
 
 
   1. Invariant Maintained:
-     - ```target ∈ [left, right)```
-  2. Loop Condition:  
+     - ```target ∈ [left, right)``` 
+  2. Initialization:
+     - ```left = 0```, ```right = nums.length``` — so that the last index (nums.length - 1) is included in [left, right)
+  3. Loop Condition:  
      - <font color = red> **while (left < right)**</font>
-  3. When ```left == right```:
+  4. When ```left == right```:
      - the loop must terminate, as this means the interval is empty.
-  4. Pointer Update Rules:
+  5. Pointer Update Rules:
      - If ```nums[middle] > target```: 
-       - Eliminate the right half **including middle**, search in ```[left, middle)```
-       - ```right = middle;```
+       - Eliminate the right half **including middle**, set ```right = middle;```
        - If we **incorrectly** set ```right = middle - 1``` (as used in ```[left, right]``` intervals), we would violate the right-open invariant — it would no longer be valid to assume ```right``` is exclusive.
      - If ```nums[middle] < target```:
-       - Eliminate the left half **including middle**, search in ```[middle + 1, right)```
-       - ```left = middle + 1;```
+       - Eliminate the left half **including middle**, set ```left = middle + 1;```
        - If we **incorrectly** set ```left = middle``` — that would re-include a value already ruled out, potentially causing an infinite loop when ```left == right - 1```.
 
 
@@ -141,7 +141,6 @@ class Solution {
         return -1; // Target not found
     }
 }
-
 ```
 
 
