@@ -1,129 +1,148 @@
 ---
 title: 704 Binary Search
-date: 2025-05-15
+date: 2025-06-08
 categories: [Leetcode_Notes, Binary Search]
 ---
 
-***
-**<font color = red> False Code</font>**
+# Binary Search
+A binary search algorithm works by repeatedly dividing **the sorted array** in half until the desired element is found or until the entire array is exausted. 
 
-```python
-class Solution(object):
-    def search(self, nums, target):
+Binary search involves many boundary conditions, the logic behind it is simple but rather sophisticated. For example:
+- Should the loop be ```while (left < right)``` or ```while (left <= right)```?
+- Should we update ```right == middle```, or ```right == midddle -1```? 
+- What happens when ```left == right```?
 
-        length = len(nums)
-        for i in range(0, length//2):
-            if nums[i] == target:
-                return i
-            elif nums[length-i-1] == target:
-                    return length-i-1
-        return -1            
-```
-
-**<font color = red> Failed Case Example </font>**
-
-```
-nums = [5]
-target = 5
-Output: -1
-Expected Output: 0
-```
+The key to these confusions is <font color = red> the definition of the search interval </font>.
 
 
-**<font color = red> False Code Analysis </font>**
 
-The false code is trying to check the elements of the list from both ends moving toward the center. It is not a binary search but rather a two-pointers approach.  
+### Core Principle: Interval Definition
+Binary search must preserve a strict invariant: at every iteration, the target must reside within a well-defined interval. Two standard interval definitions are:
+- Left-closed, right-closed: ```[left, right]```
+- Left-closed, right-open: ```[left, right)```
 
-For the input **nums = [5]**, **length** is 1, the loop range in the false code example is **range(0, length//2)**, because **1//2** is **0**, the loop does not run even once. As a result, no number is checked, and the function returns **-1**.
-
-To fix the issue for this specific case, we can modify the loop range to **range(0, length+1)//2**. This ensures that for a length of 1, the loop runs once.
-
-However, this is still not a binary search. It's a two-pointers approach that starts from both ends and meets in the middle. 
+In each case, the loop condition, termination state, and how we update pointers must all align with the chosen definition.
 
 
-***
-***
-## Binary Search
- A true binary search algorithm works by dividing **the sorted list** into half repeatedly until the desired element is found or until the entire list is exausted. 
+Taking for example we are going to search **2** in the array ```[1, 2, 3, 4, 7, 9, 10]```.
 
-Binary search involves many boundary conditions, the logic behind it is simple but rather sophisticated. For example, whether to use **while (left < right)** or **while (left <= right)**, **right == middle**, or **right == midddle -1**? The key to these confusions is <font color = red> the definition of the interval </font>.
+#### I. Interval Definition: <font color = red> [left, right]</font>.
+In this version, both ```left``` and ```right``` are valid candidate indices — the search space is inclusive on both ends.
 
-There are two different ways to define the interval.
-<br> Taking for example we are going to search **2** in an Arrary of  **1,2,3,4,7,9,10**.
 
-#### I. We define the *target* to be in a left-closed and right-closed interval, i.e. <font color = red> [left, right]</font>.
    
 |index:    | 0   | 1   | 2   | 3   | 4   | 5   |  6  | 
 |  :--:    | :--:| :--:| :--:| :--:| :--:| :--:| :--:| 
 |elements: | 1   | 2   | 3   | 4   | 7   |  9  |  10 |
 |          |L = 0|      |     | M = 3    |     |     | R = 6|
 
-&ensp;&ensp; (i) We need to use <font color = red> while (left <= right)</font>. <br>&ensp;&ensp; (ii) If nums[middle] > target, assign **right** as **middle - 1** because *nums[middle]* is definitely not the target, and the ending index of the next search left interval will be **middle - 1**.
+  1. Invariant Maintained:
+     - ```target ∈ [left, right]```
+  2. Loop Condition:  
+     - <font color = red> **while (left <= right)**</font>
+  3. When ```left == right```:
+     - the single element at that index is still valid and must be checked.
+  5. Pointer Update Rules:
+     - If ```nums[middle] > target```: 
+       - Eliminate the right half **including middle**, search in ```[left, middle - 1]```
+       - ```right = middle - 1;```
+     - If ```nums[middle] < target```:
+       - Eliminate the left half **including middle**, search in ```[middle + 1, right]```
+       - ```left = middle + 1;```
+  
 | index:    | 0   | 1   | 2   |
 |  :--:     | :--:| :--: | :--:|
 |elements:  | 1   | 2    | 3   |
 |           |L = 0| M = 1 | R = 2|
 
-```python
-class Solution(object):
-    def search(self, nums, target):
-        left, right = 0, len(nums)-1
-        while (left <= right):
-            # To avoid overflow, do not use (left + right) // 2
-            middle =  left + ((right - left) // 2)   
-            if nums[middle] == target:
-                return middle
-            elif nums[middle] > target:
-                right = middle -1
-            else: left = middle + 1
-        return -1
+
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0;
+        // Define interval as [left, right]
+        int right = nums.length - 1; 
+
+        // Since [left, right] is inclusive, use <=
+        while (left <= right) { 
+            // Prevents overflow
+            int middle = left + (right - left) / 2; 
+
+            if (nums[middle] == target) {
+                return middle;
+            } else if (nums[middle] > target) {
+                // Search in [left, middle - 1]
+                right = middle - 1; 
+            } else {
+                // Search in [middle + 1, right]
+                left = middle + 1; 
+            }
+        }
+
+        return -1; // Target not found
+    }
+}
 ```
-#### II. We define the *target* to be in a left-closed and right-open interval, i.e. <font color = red> [left, right)</font>.
+
+#### II. Interval Definition: <font color = red> [left, right)</font>.
+In this version, ```left``` is inclusive and ```right``` is exclusive. The element at index ```right``` is never considered part of the search space.
 
 |index:    | 0   | 1   | 2   | 3   | 4   | 5   |  6  |  7  |
 |  :--:    | :--:| :--:| :--:| :--:| :--:| :--:| :--:| :--:|
 |elements: | 1   | 2   | 3   | 4   | 7   |  9  |  10 |     |
 |          |L = 0|      |    | M = 3|    |     |      | R = 7|
 
-&ensp;&ensp; (i) Use <font color = red> while (left < right)</font> <br> &ensp;&ensp; (ii) If nums[middle] > target, assign **right** as **middle** because **nums[middle]** is not equal to the target, we need to continue searching in the left interval, and since the search interval is left-closed and right-open, update **right** to **middle**.
+
+  1. Invariant Maintained:
+     - ```target ∈ [left, right)```
+  2. Loop Condition:  
+     - <font color = red> **while (left < right)**</font>
+  3. When ```left == right```:
+     - the loop must terminate, as this means the interval is empty.
+  4. Pointer Update Rules:
+     - If ```nums[middle] > target```: 
+       - Eliminate the right half **including middle**, search in ```[left, middle)```
+       - ```right = middle;```
+       - If we **incorrectly** set ```right = middle - 1``` (as used in ```[left, right]``` intervals), we would violate the right-open invariant — it would no longer be valid to assume ```right``` is exclusive.
+     - If ```nums[middle] < target```:
+       - Eliminate the left half **including middle**, search in ```[middle + 1, right)```
+       - ```left = middle + 1;```
+       - If we **incorrectly** set ```left = middle``` — that would re-include a value already ruled out, potentially causing an infinite loop when ```left == right - 1```.
+
 
 | index:    | 0   | 1   | 2   | 3    |
 |  :--:     | :--:| :--: | :--:| :--:|
 |elements:  | 1   | 2    | 3   |  4  |
 |           |L = 0| M = 1|     | R = 3
 
-```python
-class Solution(object):
-    def search(self, nums, target):
-        left, right = 0, len(nums)
-        while (left < right): 
-            # To avoid overflow, do not use (left + right) // 2
-            middle =  left + ((right - left) // 2)
-            if nums[middle] == target:
-                return middle
-            elif nums[middle] > target:
-                right = middle 
-            else: left = middle + 1
-        return -1
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0;
+        // Define interval as [left, right)
+        int right = nums.length; 
+
+        // right is exclusive, so use '<'
+        while (left < right) {   
+            // Prevent integer overflow
+            int middle = left + (right - left) / 2;
+
+            if (nums[middle] == target) {
+                return middle; 
+            } else if (nums[middle] > target) {
+                // Narrow to [left, middle)
+                right = middle; 
+            } else {
+                // Narrow to [middle + 1, right)
+                left = middle + 1; 
+            }
+        }
+
+        return -1; // Target not found
+    }
+}
+
 ```
 
-***
-***
-## Variant
-#### [35_E]Search Insert Position
 
->Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
-<br> You must write an algorithm with O(log n) runtime complexity.
-
->Example 1: <br> Input: nums = [1,3,5,6], target = 5 <br> Output: 2
-<br><br> Example 2: <br> Input: nums = [1,3,5,6], target = 2 <br> Output: 1
-<br><br> Example 3: <br> Input: nums = [1,3,5,6], target = 7 <br>Output: 4
-
-Analysis: The only modification is in the return value. Instead of returning -1 when the target is not found, we return the value of ***left***, which is the index where the target should be inserted to maintain the sorted order of the array. 
-
-***
-***
-## Variant
-#### [34_M]Find First and Last Position of Element in Sorted Array
-#### [69_E]Sqrt(x)
 
