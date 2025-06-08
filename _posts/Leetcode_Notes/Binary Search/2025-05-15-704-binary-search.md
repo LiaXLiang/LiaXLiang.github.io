@@ -41,7 +41,7 @@ In this version, both ```left``` and ```right``` are valid candidate indices —
   2. Initialization:
      - ```left = 0```, ```right = nums.length - 1``` — both inclusive.
   3. Loop Condition:  
-     - <font color = red> **while (left <= right)**</font>
+     - <font color = red> while (left <= right)</font>
   4. When ```left == right```:
      - the single element at that index is still valid and must be checked.
   5. Pointer Update Rules:
@@ -98,7 +98,7 @@ In this version, ```left``` is inclusive and ```right``` is exclusive. The eleme
   2. Initialization:
      - ```left = 0```, ```right = nums.length``` — so that the last index (nums.length - 1) is included in [left, right)
   3. Loop Condition:  
-     - <font color = red> **while (left < right)**</font>
+     - <font color = red> while (left < right)</font>
   4. When ```left == right```:
      - the loop must terminate, as this means the interval is empty.
   5. Pointer Update Rules:

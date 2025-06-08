@@ -56,13 +56,67 @@ missing(4) = nums[4] - nums[0] - 4
            = 11
 This means that between nums[0] = 5 and nums[4] = 20, there are 11 missing elements.
 ```
-### 📌 Algorithm
-1. Check if the k-th missing number is beyond the array
-   - First, calculate how many numbers are missing up to the last element of the array using ```missing(n - 1)```
-   - If ```k > missing(n - 1)```, then the k-th missing number lies beyond the last element.
-     - In that case, the answer is simply: ```nums[n−1] + (k − missing(n−1))```
-2. Binary Search to Find the Correct Interval
-   - If the k-th missing number is within the bounds of the array, we perform binary search to find the smallest index *i* such that: mising(i - 1) < k ≤ missing(i)
-   - If ```missing(i) < k```, then the k-th missing number is **to the right of** index i.
-   - If ```missing(i) >= k```, then it lies **to the left** or **exactly at** index i.
-   - 
+### Algorithm Logic
+Let ```mid = left + (right - left) / 2```
+
+1. If ```missing(mid) ≥ k```:
+   - Then the k-th missing number lies **to the left of or at** index ```mid```. 
+2. If ```missing(mid) < k```:
+   - Then the k-th missing number lies **strictly to the right** of index ```mid```. 
+
+Even when ```missing(mid) == k```, we do not stop immediately — we continue searching leftward because there might be earlier positions where the same number of missing elements first reaches *k*. We want the smallest index that satisfies the condition.
+
+e.g.
+```
+nums = [4, 7, 9, 10]
+k = 3
+```
+missing(2) == 3 and missing(3) == 3. That means both index *2* and *3* satisfy the condition missing(i) == 3.
+The problem asks us to find the 3rd missing number, which lies before index 2, not after.
+
+We perform binary search to find **the smallest index *i*** such that: 
+**```mising(i - 1) < k ≤ missing(i)```**
+
+### Solution
+```java
+class Solution {
+    public int missingElement(int[] nums, int k) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        /* Case 1: 
+         If k-th missing number is beyond the last element
+        */
+        if (k > countMissing(nums, right)) {
+            return nums[right] + (k - countMissing(nums, right));
+        }
+
+        /* Case 2:
+         Binary search for the smallest index where missing(i) >= k
+        */
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // Prevent overflow
+
+            if (countMissing(nums, mid) >= k) {
+                // Even if missing(mid) == k, we continue searching to the left
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        // At the end of loop: missing(left - 1) < k <= missing(left)
+        return nums[left - 1] + (k - countMissing(nums, left - 1));
+    }
+
+    // Returns how many numbers are missing between nums[0] and nums[i]
+    private int countMissing(int[] nums, int index) {
+        return nums[index] - nums[0] - index;
+    }
+}
+```
+
+```
+Time Complexity: O(log(N))
+Space Complexity: O(1)
+```
