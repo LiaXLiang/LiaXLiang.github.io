@@ -4,11 +4,11 @@ date: 2025-05-28
 categories: [Leetcode_Notes, Two Pointers]
 ---
 ### A Ruler Metaphor
-Imagine a ruler that can dynamically adjust its length. The goal is to place its (left-end) *head* (```start```) and (right-end) *tail* (```cur```) somewhere in a string such that **every character covered by the ruler is unique**.
+Imagine a ruler that can dynamically adjust its length. The goal is to position its left end (```start```) and right end (```cur```) over a substring such that all characters within the ruler's span are unique.
 
-The (right-end) *tail* of the ruler (```cur```) moves from left to right, one character at a time.
+The right end (```cur```) moves forward one character at a time, scanning the string from left to right.
 
-The (left-end) *head* of the ruler (```start```) adjusts only when we find a repeating character that is within the current range (i.e., not already left behind).
+The left end (```start```) only advances when a duplicate character is found within the current window, ensuring all characters in the window remain distinct.
 
 
 ### 📌 Algorithm:

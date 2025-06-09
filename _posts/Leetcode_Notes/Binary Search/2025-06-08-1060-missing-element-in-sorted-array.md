@@ -8,6 +8,7 @@ categories: [Leetcode_Notes, Binary Search]
 Since the input array *nums* is strictly increasing, we can iterate through it from left to right to directly find the k-th missing number. 
 
 ### 📌 Algorithm
+Let ```n = nums.length```
 We loop through the array and, for each index i in the range 1 ≤ i < n, we perform the following steps:
 - Calculate **the number of missing elements** between ```nums[i - 1]``` and ```nums[i]```
   - If ```k ≤ missing```, it means the k-th missing number lies between ```nums[i - 1]``` and ```nums[i]```. 
