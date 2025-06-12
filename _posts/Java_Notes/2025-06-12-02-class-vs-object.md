@@ -3,7 +3,7 @@
 Let's say we visit a zoo. We see a *cat*, a *dog*, and a *rabbit*. These are actural animals we can touch - they are **objects**. But when we describe what we saw, we might just say: "I saw some *animals*." The word "*animal*" is abstract - it refers to the concept or type, not a specific instance that we can point to. In Java, that abstract idea is represented by a **class**. **`A class is a blueprint to create an object.`**
 
 ### II. Viewing Classes from the Perspective of Data Types
-From the perspective of *data types*, **`a class in Java can be seen as a user-defined composite data type`**. It achieves this by encapsulating other data types (both *primitive* and *class* <font color = red>types</font>) as its own fields, thereby defining a new, more complex data structure.
+From the perspective of *data types*, **`a class in Java can be seen as a user-defined composite data type`**. It achieves this by encapsulating other data types (both *primitive* and *class* [<font color = red>types</font>]()) as its own fields, thereby defining a new, more complex data structure.
 
 ***
 
