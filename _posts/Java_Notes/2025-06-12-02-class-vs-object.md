@@ -3,15 +3,15 @@ title: Class v.s. Object
 layout: post
 ---
 
-### I. Analogy: Animals in the Zoo
+## I. Analogy: Animals in the Zoo
 Let's say we visit a zoo. We see a *cat*, a *dog*, and a *rabbit*. These are actural animals we can touch - they are **objects**. But when we describe what we saw, we might just say: "I saw some *animals*." The word "*animal*" is abstract - it refers to the concept or type, not a specific instance that we can point to. In Java, that abstract idea is represented by a **class**. **`A class is a blueprint to create an object.`**
 
-### II. Viewing Classes from the Perspective of Data Types
+## II. Viewing Classes from the Perspective of Data Types
 From the perspective of *data types*, **`a class in Java can be seen as a user-defined composite data type`**. It achieves this by encapsulating other data types (both *primitive* and *class* [<font color = red>types</font>](https://liaxliang.github.io/04-variable-hiding-vs-variable-shadowing/)) as its own fields, thereby defining a new, more complex data structure.
 
 ***
 
-### Defining a Class
+## Defining a Class
 A Class defines:
 - **State** —— **Fields**
   - the properties an object holds (e.g., name, age, species)
@@ -44,7 +44,7 @@ public class Animal {
 - **Constructor**  
   - `Animal()` is a **default constructor**, automatically provided by the Java compiler if not explicitly written.
 
-### Instantiating Objects 
+## Instantiating Objects 
 Standard way: via a parameterized constructor
 
 e.g.
@@ -66,10 +66,10 @@ Animal animal = new Animal("Cat","Oreo", 4);
 
 
 ***
-### Understanding Object References in Java 
+## Understanding Object References in Java 
 In Java, **variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
 
-#### (1) Declare Two Animal Variables
+### (1) Declare Two Animal Variables
 ```java
 Animal a, b;
 ```
@@ -79,7 +79,7 @@ a ---> null
 b ---> null
 ```
 
-#### (2)  Instantiate an Animal Object
+### (2)  Instantiate an Animal Object
 ```java
 a = new Animal();
 ```
@@ -87,11 +87,12 @@ a = new Animal();
 - Variable *a* now holds a reference to the new Animal object.
 - All fields are initialized to their default values (*0*, *null*, etc.).
 ```
+
 a ---> [ species: null, name: null, age: 0 ]
 b ---> null
 ```
 
-#### (3) Assign Field Values
+### (3) Assign Field Values
 ```java
 a.species = "Cat";
 a.name = "Oreo";
@@ -103,7 +104,7 @@ a ---> [ species: "Cat", name: "Oreo", age: 4 ]
 b ---> null
 ```
 
-#### (4) Assign ```b = a```
+### (4) Assign ```b = a```
 ```java
 b = a;
 ```
@@ -115,7 +116,7 @@ a ---> [ species: "Cat", name: "Oreo", age: 4 ]
 b ------
 ```
 
-#### (5) Modify Through *b* 
+### (5) Modify Through *b* 
 ```java
 b.age = 5;
 ```
