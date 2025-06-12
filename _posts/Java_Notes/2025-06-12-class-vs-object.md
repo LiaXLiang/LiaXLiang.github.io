@@ -57,8 +57,5 @@ public class Animal {
 Animal animal = new Animal("Oreo", 4);
 ```
 
-***
-
-
 
 
