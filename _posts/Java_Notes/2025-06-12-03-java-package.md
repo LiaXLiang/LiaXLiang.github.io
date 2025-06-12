@@ -15,11 +15,11 @@ A **package** in Java is a **namespace** that organizes a set of related *classe
 
 e.g.
 | Developer | Class Name  | Package Path    | Fully Qualified Class Name     |
-|-----------|-------------|------------------|--------------------------------|
-| Alice         | Cat         | dev.alice            | dev.alice.Cat                      |
-| Bob        | Cat         | dev.bob            | dev.bob.Cat                      |
-| David         | Collections | custom.tools     | custom.tools.Collections       |
-| JDK       | Collections | java.util        | java.util.Collections          |
+|-----------|-------------|-----------------|--------------------------------|
+| Alice     | Cat         | dev.alice       | dev.alice.Cat                  |
+| Bob       | Cat         | dev.bob         | dev.bob.Cat                    |
+| David     | Collections | custom.tools    | custom.tools.Collections       |
+| JDK       | Collections | java.util       | java.util.Collections          |
 
 ### II. Declaring Packages in Java
 To assign a *class* to a *package*, declare the *package* at the top of the file.
