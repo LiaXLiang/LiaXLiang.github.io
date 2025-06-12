@@ -95,7 +95,7 @@ If we omit the package declaration, the class belongs to the **default package**
         }
     }
     ```
-    But if `Main` is in a different package, `bark()` will not be accessible.
+    But if `Main` is in a different package, `bark()` will NOT be accessible.
 
 2. Importing Classes
 
