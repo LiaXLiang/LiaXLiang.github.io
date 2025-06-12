@@ -1,3 +1,7 @@
+---
+title: What is Object-Oriented Programming?
+layout: post
+---
 
 To understand **Object-Oriented Programming (OOP)**, we must first grasp the concept of an **object**. But to fully appreciate the evolution and purpose of objects in programming, it's helpful to contrast them with their *predecessor*: **Procedure-Oriented Programming (POP)**
 

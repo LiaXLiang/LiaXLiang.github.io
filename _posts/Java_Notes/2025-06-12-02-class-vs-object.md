@@ -1,3 +1,7 @@
+---
+title: Class v.s. Object
+layout: post
+---
 
 ### I. Analogy: Animals in the Zoo
 Let's say we visit a zoo. We see a *cat*, a *dog*, and a *rabbit*. These are actural animals we can touch - they are **objects**. But when we describe what we saw, we might just say: "I saw some *animals*." The word "*animal*" is abstract - it refers to the concept or type, not a specific instance that we can point to. In Java, that abstract idea is represented by a **class**. **`A class is a blueprint to create an object.`**

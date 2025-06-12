@@ -1,3 +1,8 @@
+---
+title: Java Package
+layout: post
+---
+
 ### Intro
 In collaborative software development, it's common for different developers to create classes with the same name. For example:
 - Developer Alice writes a class `Cat`

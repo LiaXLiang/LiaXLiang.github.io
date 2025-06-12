@@ -1,3 +1,8 @@
+---
+title: Variable Hiding v.s. Variable Shadowing
+layout: post
+---
+
 ### Variables Are Everywhere
 
 In almost every programming language, variables serve as the basic units to solve problems. 
