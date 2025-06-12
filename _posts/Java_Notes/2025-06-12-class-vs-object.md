@@ -63,7 +63,7 @@ Animal animal = new Animal("Cat","Oreo", 4);
 
 ***
 ### Understanding Object References in Java 
-In Java, **variables of class <font color = red>types</font>) do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
+In Java, **variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
 
 #### (1) Declare Two Animal Variables
 ```java
