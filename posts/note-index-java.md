@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Java Notes
-permalink: /posts/note-index-os/
+permalink: /posts/note-index-java/
 ---
 
 # 📒 Java Notes

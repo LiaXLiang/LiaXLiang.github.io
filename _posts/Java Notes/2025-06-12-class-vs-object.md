@@ -36,4 +36,22 @@ public class Animal {
   -  *name* and *age* represent the **state** of an animal. These are also called **member variables** or **instance variables.** They do **NOT** occupy memory at compile time. Only when we instantiate the class (i.e., create an actual animal object), memory is allocated.
 - **Methods**
   - `eat()`, `sleep()`, and `hunt()` define the **behavious** of the animal.
-- **Constructor **  
+- **Constructor**  
+  - `Animal()` is a **default constructor**, automatically provided by the Java compiler if not explicitly written.
+
+### Instantiating Objects 
+Standard way: via a parameterized constructor
+e.g.
+```java
+public class Animal {
+    private String name;
+    private int age;
+
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+Animal animal = new Animal("Oreo", 4);
+```
