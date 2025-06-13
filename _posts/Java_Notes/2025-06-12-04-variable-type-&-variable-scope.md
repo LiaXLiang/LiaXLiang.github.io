@@ -15,6 +15,7 @@ int score = 100;
 ```
 Here, `score` is a variable — but Java doesn't just see a name and a value. It also sees a <font color = red>type</font>.
 
+***
 
 ## Type
 ### 1. What is a "Type", and why do variables need it?
@@ -77,6 +78,74 @@ Every class can be used as a type, but not every type is a class.
     - The variable `a` has a **decalred type** `Animal`, and its **actual object** is also of type `Animal`.
 
 
+### 4. Understanding Object References in Java 
+In Java, **variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
+
+#### (1) Declare Two Animal Variables
+```java
+Animal a, b;
+```
+We've declared two variables *a* and *b*. These are reference variables, but they do not yet point to any object — their value is null.
+```
+a ---> null
+b ---> null
+```
+
+#### (2)  Instantiate an Animal Object
+```java
+a = new Animal();
+```
+- This creates a new Animal object on the heap.
+- Variable *a* now holds a reference to the new Animal object.
+- All fields are initialized to their default values (*0*, *null*, etc.).
+```
+
+a ---> [ species: null, name: null, age: 0 ]
+b ---> null
+```
+
+#### (3) Assign Field Values
+```java
+a.species = "Cat";
+a.name = "Oreo";
+a.age = 4;
+```
+Now, the object referenced by *a* has updated fields.
+```
+a ---> [ species: "Cat", name: "Oreo", age: 4 ]
+b ---> null
+```
+
+#### (4) Assign ```b = a```
+```java
+b = a;
+```
+Now, *b* also refers to the same object in memory that *a* points to. This is not a copy of the object — both *a* and *b* point to the same instance.
+```
+a ---> [ species: "Cat", name: "Oreo", age: 4 ]
+        ^
+        |
+b ------
+```
+
+#### (5) Modify Through *b* 
+```java
+b.age = 5;
+```
+Since both *a* and *b* point to the same object, modifying the object through *b* also affects *a*.
+```
+a ---> [ species: "Cat", name: "Oreo", age: 5 ]
+        ^
+        |
+b ------
+```
+
+
+
+
+
+*** 
+
 ## Scope
 Understanding a variable's type is only part of the story.
 
@@ -84,7 +153,13 @@ In real-world scenarios, multiple variables with the same name can exist in diff
 
 While *type* answers the question "**what is this variable?**, *scope* answers "**where is this variable accessible?**" and "**which one is picked if there are multiple with the same name?**".
 
+By scope, Java variables fall into four main categories:
+- Local Variables
+- Instance (Member) Variables
+- Static (Class) Variables
+- Constants (`final`)
 
+### 1. Local Variables
 
 
 
