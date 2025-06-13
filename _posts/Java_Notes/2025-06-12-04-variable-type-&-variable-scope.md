@@ -31,9 +31,10 @@ Without knowing the type, the compiler can't do its job. That’s why Java is **
 ### 2. Java has two main categories of types
 #### I. Primitive Types (also called Value Types)
 
-Primitive Data Types are atomic in the sense of not being composed of smaller parts. <font color = sky-blue>They are **stored directly in stack memory**</font> and are NOT instances of any class.
+Primitive Data Types are atomic in the sense of not being composed of smaller parts. <font color = red>They are stored directly in stack memory</font> and are NOT instances of any class.
 
 Java defines 8 built-in primitive types, each representing a specific kind of raw value:
+
 | Category        | Types                        |
 |:----------------|:-----------------------------|
 | Integer         | byte, short, int, long       |
@@ -42,15 +43,15 @@ Java defines 8 built-in primitive types, each representing a specific kind of ra
 | Boolean         | boolean                      |
 
 Precision Ordering of Integer Types:
-- **byte** (8 bit signed integer) < **short** (16-bit signed integer) 
+- **byte** (**8** bit signed integer) < **short** (**16**-bit signed integer) 
   
-  < **int** (32-bit signed integer) < **long** (64-bit signed integer) 
+  < **int** (**32**-bit signed integer) < **long** (**64**-bit signed integer) 
   
   < **float** (32-bit floating point) < **double** (64-bit floating point)
 - Note that just because *byte* or *short* uses less memory doesn't mean it's faster. On most systems, operations on *int* are more efficient, and smaller types might even be promoted to *int* during computation.
 
 #### II. Reference Types (also called Object Types)
- <font color = sky-blue>Reference types **store a memory address (reference)** pointing to an object stored in heap memory.</font>
+ <font color = red>Reference types store a memory address (reference) pointing to an object stored in heap memory.</font>
 
 | Reference Type | Description                        | Example         |
 |:---------------|:-----------------------------------|:----------------|
@@ -60,6 +61,7 @@ Precision Ordering of Integer Types:
 | Enum           | Constant group of named values     | `Day day;`      |
 
 ### 3.  Type v.s. Class: What's the Difference?
+
 | Aspect              | Type                                                                 | Class                                                   |
 |:--------------------|:----------------------------------------------------------------------|:---------------------------------------------------------|
 | What it is          | A **compiler-level concept** that tells what kind of data a **variable** holds and how it behaves | A **programmer-defined** blueprint for creating **objects**      |
@@ -78,7 +80,7 @@ Every class can be used as a type, but not every type is a class.
 
 
 ### 4. Understanding Object References in Java 
-In Java, **variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
+In Java, variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
 
 #### (1) Declare Two Animal Variables
 ```java
@@ -162,7 +164,7 @@ By scope, Java variables fall into three main categories:
 - Static (Class) Variables
 
 ### 1. Local Variables
-A local variable is declared **<font color = sky-blue>WITHIN a method, constructor, or block (such as loops or if statements)</font>**. Its scope is strictly confined to the enclosing block where it is declared, meaning it can only be accessed from the point of declaration until the end of that block.
+A local variable is declared <font color = red>WITHIN a method, constructor, or block (such as loops or if statements)</font>. Its scope is strictly confined to the enclosing block where it is declared, meaning it can only be accessed from the point of declaration until the end of that block.
 
 | Aspect             | Description                                                                                                                                                         |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -174,7 +176,7 @@ A local variable is declared **<font color = sky-blue>WITHIN a method, construct
 
 
 ### 2. Instance (Member) Variables
-An instance variable is declared **<font color = sky-blue>WITHIN a class but OUTSIDE any method/constructor/block</font>**. They define the **state** of an individual **object** and persist as long as the object exists in memory.
+An instance variable is declared <font color = red>WITHIN a class but OUTSIDE any method/constructor/block</font>. They define the **state** of an individual **object** and persist as long as the object exists in memory.
 
 | Aspect             | Description                                                                                                                                                         |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -212,7 +214,7 @@ public class Test {
 
 
 ### 3. Static (Class) Variables
-A static variable is declared **<font color = sky-blue>with the `static` keyword</font>**. It belongs to the class rather than any instance. It is shared across all objects of the class.
+A static variable is declared <font color = red>with the `static` keyword</font>. It belongs to the class rather than any instance. It is shared across all objects of the class.
 
 | Aspect             | Description                                                                                                                                                                         |
 |:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -226,9 +228,9 @@ A static variable is declared **<font color = sky-blue>with the `static` keyword
 *** 
 ## Variable Shadowing v.s. Variable Hiding
 ### 1. Variable Shadowing
-Shadowing occurs when **<font color = sky-blue>a local variable</font>**(declared within a method/constructor/block) or **<font color = sky-blue>a method parameter</font>** shares the same name as **<font color = sky-blue>an instance or static field</font>** in the same class.
+Shadowing occurs when <font color = red>a local variable</font>(declared within a method/constructor/block) or <font color = red>a method parameter</font> shares the same name as <font color = red>an instance or static field</font> in the same class.
 
-**<font color = sky-blue>In that local scope, the instance/static variable is shadowed</font>** - its name is hidden in name resolution and can only be accessed explicitly: 
+<font color = red>In that local scope, the instance/static variable is shadowed</font> - its name is hidden in name resolution and can only be accessed explicitly: 
   - Use `this.fieldName` to access the shadowed instance field.
   - Use `ClassName.fieldName` to access the shadowed static field.
 
@@ -292,9 +294,9 @@ Total Triangle objects created: 2
 ```
 
 ### 2. Variable Hiding 
-Hiding occurs when **<font color = sky-blue>a subclass</font>** declares a field with the same name as one in its **<font color = sky-blue>superclass</font>**. 
+Hiding occurs when <font color = red>a subclass</font> declares a field with the same name as one in its <font color = red>superclass</font>. 
 
-Unlike methods, fields in Java are NOT polymorphic — the superclass field is not *overridden*, but rather **hidden**. 
+Unlike methods, fields in Java are NOT polymorphic — <font color = red>the superclass field is not overridden, but rather hidden</font>. 
 
 Which field is accessed **depends on the reference type**, NOT the runtime object.
   - To access the hidden superclass field: use `super.fieldName`.
