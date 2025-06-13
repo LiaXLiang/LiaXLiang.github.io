@@ -298,6 +298,145 @@ Hiding occurs when <font color = red>a subclass</font> declares a field with the
 
 Unlike methods, fields in Java are NOT polymorphic — <font color = red>the superclass field is not overridden, but rather hidden</font>. 
 
-Which field is accessed **depends on the reference type**, NOT the runtime object.
+Which field is accessed **depends on the declared reference type**, NOT the runtime object.
   - To access the hidden superclass field: use `super.fieldName`.
   - To access the subclass field: cast the reference to the subclass type if necessary.
+
+e.g.
+```java
+class Animal {
+    String name;
+    boolean isDomestic;
+}
+
+class Cat extends Animal {
+    String name;         // hides Animal.name
+    String isDomestic;   // hides Animal.isDomestic
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Cat cat = new Cat();
+        Animal animal= cat;
+
+        // Scenario 1
+        cat.name = "Kitty";
+        System.out.println(cat.name);       // Cat's field
+        System.out.println(animal.name); // Animal's field
+
+        // Scenario 2
+        animal.name = "Whiskers";
+        System.out.println(cat.name);       // Cat's field remains unchanged
+        System.out.println(animal.name); // Animal's field changed
+
+        // Scenario 3
+        cat.isDomestic = "yes";
+        animal.isDomestic = true;
+
+        System.out.println(cat.isDomestic);      // Cat's field (String)
+        System.out.println(animal.isDomestic); // Animal's field (boolean)
+    }
+}
+```
+
+```
+Output:
+Kitty
+null
+
+Kitty
+Whiskers
+
+yes
+true
+```
+
+```java
+Cat cat = new Cat();
+Animal animal = cat;
+```
+
+```
+References:
+
+  cat        ─────┐
+  animal     ─────┘ ——>  both point to the same Cat object
+
+╔══════════════════════════════════════════════╗
+║                 Object: Cat                  ║
+║──────────────────────────────────────────────║
+║               |  name      isDomestic        ║
+║ Animal part   |  null      false             ║
+║ Cat part      |  null      null              ║
+╚══════════════════════════════════════════════╝
+```
+
+```java
+// Scenario 1
+cat.name = "Kitty";
+System.out.println(cat.name);       // "Kitty"
+System.out.println(animal.name);   // null
+```
+```
+
+References:
+  cat        ─────┐
+  animal     ─────┘ ——>  both point to the same Cat object
+
+╔══════════════════════════════════════════════╗
+║                 Object: Cat                  ║
+║──────────────────────────────────────────────║
+║               |  name      isDomestic        ║
+║ Animal part   |  null      false             ║
+║ Cat part      |  "Kitty"   null              ║
+╚══════════════════════════════════════════════╝
+```
+
+```java
+// Scenario 2
+animal.name = "Whiskers";
+System.out.println(cat.name);       // "Kitty"
+System.out.println(animal.name); // "Whiskers"
+```
+```
+References:
+  cat        ─────┐
+  animal     ─────┘ ——>  both point to the same Cat object
+
+╔══════════════════════════════════════════════╗
+║                 Object: Cat                  ║
+║──────────────────────────────────────────────║
+║               |  name        isDomestic      ║
+║ Animal part   |  "Whiskers"  false           ║
+║ Cat part      |  "Kitty"     null            ║
+╚══════════════════════════════════════════════╝
+```
+```java
+// Scenario 3
+cat.isDomestic = "yes";
+animal.isDomestic = true;
+
+System.out.println(cat.isDomestic);      // "yes"
+System.out.println(animalRef.isDomestic); // true
+```
+
+```
+References:
+  cat        ─────┐
+  animal     ─────┘ ——>  both point to the same Cat object
+
+╔══════════════════════════════════════════════╗
+║                 Object: Cat                  ║
+║──────────────────────────────────────────────║
+║               |  name        isDomestic      ║
+║ Animal part   |  "Whiskers"  true            ║
+║ Cat part      |  "Kitty"     "yes"           ║
+╚══════════════════════════════════════════════╝
+```
+
+In all scenarios, both `animal` and `cat` refer to the **same runtime object**, an instance of the `Cat` class. However, field access in Java is statically bound - the compiler resolves which field to access based on the **declared type of the reference**, **NOT the actual type of the object**.
+
+As a result:
+- `animal.name` accesses the name field defined in the `Animal` class
+- `cat.name` accesses the name field declared in the `Cat` subclass
