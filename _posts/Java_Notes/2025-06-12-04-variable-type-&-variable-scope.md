@@ -71,29 +71,22 @@ Precision Ordering of Integer Types:
 Every class can be used as a type, but not every type is a class.
 - e.g. 
     ```java
-    Animal a = new Animal();
+    Animal a = new Animal(); 
     ```
-    - `Animal` is a class.
-    - The variable `a` has the type `Animal`.
+    - `new Animal()` creates a new **object** whose **runtime class** is `Animal`, and stores a **reference** to it in variable `a`.
+    - The variable `a` has a **decalred type** `Animal`, and its **actual object** is also of type `Animal`.
 
-`new Animal()` creates an **object** of **class** `Animal` and stores a **reference** to it in variable *a*.
 
 ## Scope
 Understanding a variable's type is only part of the story.
 
-In real-world scenarios, multiple variables with the same name can exist in different locations - a method, a class, a subclass, or even a loop. This is where the concpet of **scope**
+In real-world scenarios, multiple variables with the same name can exist in different locations - a method, a class, a subclass, or even a loop. This is where the concpet of **scope** comes in.
+
+While *type* answers the question "**what is this variable?**, *scope* answers "**where is this variable accessible?**" and "**which one is picked if there are multiple with the same name?**".
 
 
 
 
-e.g.
-```java
-String name = "Alice";
-Animal cat = new Cat();
-```
-- *name* has type `String`
-- *cat* has type `Animal` (even though the object is of class `Cat`)
 
-This distinction between **type (what the variable is declared as)** and **class (what object is actually stored)** will turn out to be crucial.
 
 
