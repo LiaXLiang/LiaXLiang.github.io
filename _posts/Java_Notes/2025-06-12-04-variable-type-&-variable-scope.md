@@ -24,8 +24,7 @@ In Java, a variable acts like a named memory *container* that stores values duri
  
 A variable's type tells the compiler:
 - what **values** it can take,
-- what **operations / type-checking** you can / should perform on it
-- how to **resolve variable naming conflicts**
+- what **operations / type-checking** it can / should perform on it
 
 Without knowing the type, the compiler can't do its job. That’s why Java is **`a statically typed language`**: **every variable must have a type known at compile time**.
 
@@ -147,21 +146,156 @@ b ------
 *** 
 
 ## Scope
-Understanding a variable's type is only part of the story.
+Understanding a variable's type is not sufficient to understand how it behaves in real programs.
 
-In real-world scenarios, multiple variables with the same name can exist in different locations - a method, a class, a subclass, or even a loop. This is where the concpet of **scope** comes in.
+Let's say we declare two variables with the same name - one inside a method, and one as a field in the class. Or, we declare a field in a subclass that has the same name as one in its superclass. Which variable does Java access? This is where the concpet of **scope** comes in.
 
-While *type* answers the question "**what is this variable?**, *scope* answers "**where is this variable accessible?**" and "**which one is picked if there are multiple with the same name?**".
+A Variable's scope defines:
+- **where** a variable is accessible
+- **when** it is created and destroyed
+- **which** variable gets used when multiple variables with the same name exist
 
-By scope, Java variables fall into four main categories:
+
+By scope, Java variables fall into three main categories:
 - Local Variables
 - Instance (Member) Variables
 - Static (Class) Variables
-- Constants (`final`)
 
 ### 1. Local Variables
+A local variable is declared **<font color = sky-blue>WITHIN a method, constructor, or block (such as loops or if statements)</font>**. Its scope is strictly confined to the enclosing block where it is declared, meaning it can only be accessed from the point of declaration until the end of that block.
+
+| Aspect             | Description                                                                                                                                                         |
+|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Lifetime**       | Created when execution enters its defining block. <br>Automatically destroyed when control exits the block.                                                         |
+| **Accessibility**  | Accessible only within its declared scope. <br>Not visible outside the block.                                                                                       |
+| **Modifier**       | Cannot be declared with access modifiers (`public`, `private`, `protected`), as local variables are not part of the class-level API. <br>Can be declared `final` to prevent reassignment after initialization.              |
+| **Storage**        | Stored in the **call stack** of the executing thread(as opposed to the heap for instance variables). <br>Each thread maintains its own copy; not shared across instances or threads.       |
+| **Initialization** | **Must** be explicitly initialized before its first use. <br>**No default value** is assigned automatically (unlike instance or static variables).                      |
 
 
+### 2. Instance (Member) Variables
+An instance variable is declared **<font color = sky-blue>WITHIN a class but OUTSIDE any method/constructor/block</font>**. They define the **state** of an individual **object** and persist as long as the object exists in memory.
+
+| Aspect             | Description                                                                                                                                                         |
+|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Lifetime**       | Created when an object is instantiated (i.e., via `new`) and exists as long as the object exists. <br>Destroyed when the object is garbage collected.              |
+| **Accessibility**  | Depends on its access modifier — can be `public`, `private`, `protected`, or package-private (default).                                                            |
+| **Modifier**       | Can be declared with access modifiers (`public`, `private`, `protected`). <br>Can also be declared `final` to ensure it is assigned only once.                     |
+| **Storage**        | Stored in the **heap memory** as part of the object. <br>Each instance of the class has its own copy of the variable.                                               |
+| **Initialization** | Automatically initialized with a **default value** if not explicitly assigned (e.g., `0` for `int`, `null` for reference types, `false` for `boolean`).            |
 
 
+e.g.
+```java
+public class Test {
 
+    int instanceVar; 
+
+    public void demo() {
+        int localVar; 
+
+        // ✅ OK — instanceVar has a default value of 0
+        System.out.println(instanceVar); 
+
+        // ❌ Compile-time error — localVar must be explicitly initialized
+        System.out.println(localVar);    
+    }
+}
+```
+
+- `instanceVar`
+  - Instance variable (field), implicitly initialized to 0
+  - Visible **throughout the entire class** (`Test`), as long as accessed through an object
+- `localVar`
+  - Local variable, not initialized by default
+  - Only visible **within the method block** `demo()`
+
+
+### 3. Static (Class) Variables
+A static variable is declared **<font color = sky-blue>with the `static` keyword</font>**. It belongs to the class rather than any instance. It is shared across all objects of the class.
+
+| Aspect             | Description                                                                                                                                                                         |
+|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Lifetime**       | Created when the class is **loaded by the JVM** (typically on first reference). <br>Destroyed when the class is unloaded or when the JVM shuts down.                              |
+| **Accessibility**  | Controlled by access modifiers: `public`, `private`, `protected`, or package-private (default). <br>**Best practice**: declare `private` and expose via static getter/setter.     |
+| **Modifier**       | Must be declared with the `static` keyword. <br>Often combined with `final` for constants, e.g., `public static final double PI = 3.14`.                                            |
+| **Storage**        | Stored in the **method area** (JVM metaspace). <br>Only **ONE copy exists per class**, shared across all instances and threads.              |
+| **Initialization** | Automatically initialized with **default values** (e.g., `0`, `false`, `null`). <br>Explicit initialization is recommended for clarity and control.                                |
+
+
+*** 
+## Variable Shadowing v.s. Variable Hiding
+### 1. Variable Shadowing
+Shadowing occurs when **<font color = sky-blue>a local variable</font>**(declared within a method/constructor/block) or **<font color = sky-blue>a method parameter</font>** shares the same name as **<font color = sky-blue>an instance or static field</font>** in the same class.
+
+**<font color = sky-blue>In that local scope, the instance/static variable is shadowed</font>** - its name is hidden in name resolution and can only be accessed explicitly: 
+  - Use `this.fieldName` to access the shadowed instance field.
+  - Use `ClassName.fieldName` to access the shadowed static field.
+
+e.g. 
+```java
+public class VariableShadowingDemo {
+    public static void main(String[] args) {
+        Triangle triangle1 = new Triangle();
+        Triangle.setSides(triangle1, 3, 4, 5);
+        int result1 = triangle1.compute();
+        System.out.println("Computed sum (triangle1) = " + result1);
+
+        Triangle triangle2 = new Triangle();
+        Triangle.setSides(triangle2, 6, 8, 10);
+        int result2 = triangle2.compute();
+        System.out.println("Computed sum (triangle2) = " + result2);
+
+        // Access static field
+        System.out.println("Total Triangle objects created: " + Triangle.unitCount);
+    }
+}
+
+
+class Triangle {
+    int a, b, c; // Instance variables
+    static int unitCount = 0; // Static variable shared across all Triangle instances
+
+    /**
+     * Sets the sides of the given triangle.
+     * Demonstrates how method parameters can shadow instance variables.
+     * Also shows how a local variable can shadow a static field.
+     */
+    static void setSides(Triangle t, int a, int b, int c) {
+        // Method parameters 'a', 'b', 'c' shadow the instance fields 't.a', 't.b', 't.c'
+        t.a = a;
+        t.b = b;
+        t.c = c;
+
+        // Example of shadowing a static variable (⚠️ not recommended)
+        int unitCount = 7; // This local variable shadows the static field 'Triangle.unitCount'
+
+        // To increment the static field, we must qualify it using the class name
+        Triangle.unitCount++;
+    }
+
+    /**
+     * Computes the sum of the three sides.
+     * Demonstrates shadowing of an instance field by a local variable.
+     */
+    int compute() {
+        int b = this.b + 1; // Local variable 'b' shadows the instance variable 'this.b'
+        return a + b + c;   // Uses instance 'a' and 'c', and local 'b'
+    }
+}
+```
+```
+Output:
+Computed sum (triangle1) = 13
+Computed sum (triangle2) = 25
+Total Triangle objects created: 2
+```
+
+### 2. Variable Hiding 
+Hiding occurs when **<font color = sky-blue>a subclass</font>** declares a field with the same name as one in its **<font color = sky-blue>superclass</font>**. 
+
+Unlike methods, fields in Java are NOT polymorphic — the superclass field is not *overridden*, but rather **hidden**. 
+
+Which field is accessed **depends on the reference type**, NOT the runtime object.
+  - To access the hidden superclass field: use `super.fieldName`.
+  - To access the subclass field: cast the reference to the subclass type if necessary.
