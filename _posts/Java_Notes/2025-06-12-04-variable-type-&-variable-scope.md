@@ -47,7 +47,7 @@ Precision Ordering of Integer Types:
   
   < **int** (**32**-bit signed integer) < **long** (**64**-bit signed integer) 
   
-  < **float** (32-bit floating point) < **double** (64-bit floating point)
+  < **float** (**32**-bit floating point) < **double** (**64**-bit floating point)
 - Note that just because *byte* or *short* uses less memory doesn't mean it's faster. On most systems, operations on *int* are more efficient, and smaller types might even be promoted to *int* during computation.
 
 #### II. Reference Types (also called Object Types)
@@ -80,7 +80,7 @@ Every class can be used as a type, but not every type is a class.
 
 
 ### 4. Understanding Object References in Java 
-In Java, variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer)** to the object in memory. 
+In Java, variables of class <font color = red>types</font> do NOT store the object itself, but rather a reference (pointer) to the object in memory. 
 
 #### (1) Declare Two Animal Variables
 ```java
@@ -96,11 +96,12 @@ b ---> null
 ```java
 a = new Animal();
 ```
+
 - This creates a new Animal object on the heap.
 - Variable *a* now holds a reference to the new Animal object.
 - All fields are initialized to their default values (*0*, *null*, etc.).
+  
 ```
-
 a ---> [ species: null, name: null, age: 0 ]
 b ---> null
 ```
@@ -112,6 +113,7 @@ a.name = "Oreo";
 a.age = 4;
 ```
 Now, the object referenced by *a* has updated fields.
+
 ```
 a ---> [ species: "Cat", name: "Oreo", age: 4 ]
 b ---> null
@@ -168,11 +170,11 @@ A local variable is declared <font color = red>WITHIN a method, constructor, or 
 
 | Aspect             | Description                                                                                                                                                         |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Lifetime**       | Created when execution enters its defining block. <br>Automatically destroyed when control exits the block.                                                         |
-| **Accessibility**  | Accessible only within its declared scope. <br>Not visible outside the block.                                                                                       |
+| **Lifetime**       | Created when execution enters its defining block. <br>Automatically destroyed when control exits the block.      |                                                  
+| **Accessibility**  | Accessible only within its declared scope. <br>Not visible outside the block.   |                           
 | **Modifier**       | Cannot be declared with access modifiers (`public`, `private`, `protected`), as local variables are not part of the class-level API. <br>Can be declared `final` to prevent reassignment after initialization.              |
 | **Storage**        | Stored in the **call stack** of the executing thread(as opposed to the heap for instance variables). <br>Each thread maintains its own copy; not shared across instances or threads.       |
-| **Initialization** | **Must** be explicitly initialized before its first use. <br>**No default value** is assigned automatically (unlike instance or static variables).                      |
+| **Initialization** | **Must** be explicitly initialized before its first use. <br>**No default value** is assigned automatically (unlike instance or static variables).     |
 
 
 ### 2. Instance (Member) Variables
@@ -181,9 +183,9 @@ An instance variable is declared <font color = red>WITHIN a class but OUTSIDE an
 | Aspect             | Description                                                                                                                                                         |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Lifetime**       | Created when an object is instantiated (i.e., via `new`) and exists as long as the object exists. <br>Destroyed when the object is garbage collected.              |
-| **Accessibility**  | Depends on its access modifier — can be `public`, `private`, `protected`, or package-private (default).                                                            |
+| **Accessibility**  | Depends on its access modifier — can be `public`, `private`, `protected`, or package-private (default).                                    |
 | **Modifier**       | Can be declared with access modifiers (`public`, `private`, `protected`). <br>Can also be declared `final` to ensure it is assigned only once.                     |
-| **Storage**        | Stored in the **heap memory** as part of the object. <br>Each instance of the class has its own copy of the variable.                                               |
+| **Storage**        | Stored in the **heap memory** as part of the object. <br>Each instance of the class has its own copy of the variable.   |
 | **Initialization** | Automatically initialized with a **default value** if not explicitly assigned (e.g., `0` for `int`, `null` for reference types, `false` for `boolean`).            |
 
 
@@ -214,7 +216,7 @@ public class Test {
 
 
 ### 3. Static (Class) Variables
-A static variable is declared <font color = red>with the `static` keyword</font>. It belongs to the class rather than any instance. It is shared across all objects of the class.
+A static variable is declared <font color = red>with the static keyword</font>. It belongs to the class rather than any instance. It is shared across all objects of the class.
 
 | Aspect             | Description                                                                                                                                                                         |
 |:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -228,7 +230,7 @@ A static variable is declared <font color = red>with the `static` keyword</font>
 *** 
 ## Variable Shadowing v.s. Variable Hiding
 ### 1. Variable Shadowing
-Shadowing occurs when <font color = red>a local variable</font>(declared within a method/constructor/block) or <font color = red>a method parameter</font> shares the same name as <font color = red>an instance or static field</font> in the same class.
+Shadowing occurs when <font color = red>a local variable</font> (declared within a method/constructor/block) or <font color = red>a method parameter</font> shares the same name as <font color = red> an instance or static field</font> in the same class.
 
 <font color = red>In that local scope, the instance/static variable is shadowed</font> - its name is hidden in name resolution and can only be accessed explicitly: 
   - Use `this.fieldName` to access the shadowed instance field.
@@ -319,7 +321,7 @@ class Cat extends Animal {
 public class Main {
     public static void main(String[] args) {
         Cat cat = new Cat();
-        Animal animal= cat;
+        Animal animal = cat;
 
         // Scenario 1
         cat.name = "Kitty";
