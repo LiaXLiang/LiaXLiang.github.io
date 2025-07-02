@@ -1,5 +1,5 @@
 ---
-title: 1060 Missing Element in Sorted Array
+title: 1060. Missing Element in Sorted Array
 date: 2025-06-08
 categories: [Leetcode_Notes, Binary Search]
 ---

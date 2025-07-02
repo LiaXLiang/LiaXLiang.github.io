@@ -1,5 +1,5 @@
 ---
-title: 994 Rotting Oranges
+title: 994. Rotting Oranges
 date: 2025-05-20
 categories: [Leetcode_Notes, BFS and DFS]
 ---

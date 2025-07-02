@@ -1,5 +1,5 @@
 ---
-title: 70 Climbing Stairs
+title: 70. Climbing Stairs
 date: 2025-07-02
 categories: [Leetcode_Notes, Dynamic Programming]
 ---

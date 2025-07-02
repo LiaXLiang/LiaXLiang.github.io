@@ -1,5 +1,5 @@
 ---
-title: 17 Letter Combinations Of A Phone Number
+title: 17. Letter Combinations Of A Phone Number
 date: 2025-05-15
 categories: [Leetcode_Notes, BFS and DFS]
 ---

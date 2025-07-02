@@ -1,5 +1,5 @@
 ---
-title: 1942 The Number of the Smallest Unoccupied Chair
+title: 1942. The Number of the Smallest Unoccupied Chair
 date: 2025-05-31
 categories: [Leetcode_Notes, Word Problem]
 ---

@@ -1,5 +1,5 @@
 ---
-title: 997 Find the Town Judge
+title: 997. Find the Town Judge
 date: 2025-05-28
 categories: [Leetcode_Notes, Word Problem]
 ---

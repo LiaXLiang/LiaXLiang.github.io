@@ -1,5 +1,5 @@
 ---
-title: 1958 Check if Move is Legal
+title: 1958. Check if Move is Legal
 date: 2025-06-01
 categories: [Leetcode_Notes, Word Problem]
 ---

@@ -1,5 +1,5 @@
 ---
-title: 94 Binary Tree Inorder Traversal
+title: 94. Binary Tree Inorder Traversal
 date: 2025-06-06
 categories: [Leetcode_Notes, Tree Traversal]
 ---

@@ -1,5 +1,5 @@
 ---
-title: 73 Set Matrix Zeroes
+title: 73. Set Matrix Zeroes
 date: 2025-06-01
 categories: [Leetcode_Notes, Matrix Problem]
 ---

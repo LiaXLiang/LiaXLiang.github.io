@@ -1,5 +1,5 @@
 ---
-title: 98 Validate Binary Search Tree
+title: 98. Validate Binary Search Tree
 date: 2025-06-05
 categories: [Leetcode_Notes, Tree Traversal]
 ---

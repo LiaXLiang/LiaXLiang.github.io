@@ -1,5 +1,5 @@
 ---
-title: 151 Reverse Words in a String
+title: 151. Reverse Words in a String
 date: 2025-07-02
 categories: [Leetcode_Notes, Two Pointers]
 ---

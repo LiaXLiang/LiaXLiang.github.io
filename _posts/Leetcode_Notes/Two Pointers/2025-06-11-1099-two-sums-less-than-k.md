@@ -1,5 +1,5 @@
 ---
-title: 1099 Two Sum Less Than K
+title: 1099. Two Sum Less Than K
 date: 2025-06-11
 categories: [Leetcode_Notes, Two Pointers]
 ---

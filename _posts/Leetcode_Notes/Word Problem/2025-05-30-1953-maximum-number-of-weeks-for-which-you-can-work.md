@@ -1,5 +1,5 @@
 ---
-title: 1953 Maximum Number of Weeks for Which You Can Work
+title: 1953. Maximum Number of Weeks for Which You Can Work
 date: 2025-05-30
 categories: [Leetcode_Notes, Word Problem]
 ---

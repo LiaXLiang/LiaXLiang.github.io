@@ -1,5 +1,5 @@
 ---
-title: 509 Fibonacci Number
+title: 509. Fibonacci Number
 date: 2025-06-09
 categories: [Leetcode_Notes, Dynamic Programming]
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3 Longest Substring Without Repeating Characters
+title: 3. Longest Substring Without Repeating Characters
 date: 2025-05-28
 categories: [Leetcode_Notes, Two Pointers]
 ---

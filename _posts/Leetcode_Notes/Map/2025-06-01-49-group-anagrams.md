@@ -1,5 +1,5 @@
 ---
-title: 49 Group Anagrams
+title: 49. Group Anagrams
 date: 2025-06-01
 categories: [Leetcode_Notes, Map]
 ---

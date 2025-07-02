@@ -1,5 +1,5 @@
 ---
-title: 704 Binary Search
+title: 704. Binary Search
 date: 2025-06-08
 categories: [Leetcode_Notes, Binary Search]
 ---
