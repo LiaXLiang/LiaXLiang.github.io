@@ -58,7 +58,7 @@ public class Person {
 
     // Age control
     public void setAge(int age) {
-        if (age < 18 || age > 70) { 
+        if (age < 1 || age > 100) { 
             throw new IllegalArgumentException("Age must be 1–100");
         }
         this.age = age;
@@ -83,7 +83,6 @@ public class Person {
     private String name;
     private LocalDate birthDate;     // Replaces 'age' with 'birthDate'
     private boolean married;
-
 
     // Name control
 
