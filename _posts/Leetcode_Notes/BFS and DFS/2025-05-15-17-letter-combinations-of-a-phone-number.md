@@ -148,7 +148,7 @@ Where:
    - A **leaf node** corresponds to a compete and valid result.
   
 2. We can abstract the above *backtracking* process into 3 major components:
-   - (***level*** is not explicitly tracked — recursion depth naturally encodes it.)
+   - ***level*** is not explicitly tracked — recursion depth naturally encodes it.
    - ```currentPath``` 
      - corresponds to the ***node*** in the tree model. 
      - Represents the current state — the sequence of decisions made from the root to the current node.
