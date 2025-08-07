@@ -17,7 +17,7 @@ We begin by sorting the array, which ensures that we can easily identify if adja
      - `candidates[i] == candidates[i - 1]` ensures we skip the current element if it is the same as the previous element, thus avoiding duplicate combinations.
 
 ### Solution
-//====== Marks the difference with [Leetcode 49: Combination Sum II]().
+`//======` marks the difference with [Leetcode 49: Combination Sum II](https://liaxliang.github.io/39-combination-sum/).
 ```java
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
