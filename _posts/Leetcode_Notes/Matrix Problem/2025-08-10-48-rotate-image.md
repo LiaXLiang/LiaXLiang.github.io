@@ -75,11 +75,11 @@ This forms a 4-way cycle, allowing us to rotate the matrix in-place by iterating
       - For odd 𝑛, the middle cell is a single element and does not need rotation.
 
 2. Iterate within a layer: 
-   
-   For each element in the current layer, perform 4-way swap.
-   - Why go up to (n + 1) / 2?
-     -  
 
+   For each element in the current layer, perform 4-way swap. 
+   
+   - For each layer i, we process elements starting from the top-left corner `(i, i)` and move rightwards along the top edge of the ring.
+   - However, we exclude the last column of the top edge (i.e., j goes from i to n - 1 - i), because the last element in the top edge (`(i, n - 1 - i)`) is part of the first 4-way swap and will be handled automatically. 
 
 ### Solution
 ```java
