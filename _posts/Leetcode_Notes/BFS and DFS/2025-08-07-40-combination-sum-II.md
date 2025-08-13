@@ -1,5 +1,5 @@
 ---
-title: 40. Combination Sum II.
+title: 40. Combination Sum II
 date: 2025-08-07
 categories: [Leetcode_Notes, BFS and DFS]
 ---
