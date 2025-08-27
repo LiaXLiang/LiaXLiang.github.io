@@ -25,6 +25,7 @@ os.environ["AZURE_OPENAI_ENDPOINT"] = "https://gpt-dbis.openai.azure.com"
 os.environ["OPENAI_API_TYPE"] = "azure"
 os.environ["OPENAI_API_VERSION"] = "2024-08-01-preview"
 
+
 llm = AzureChatOpenAI(
     azure_deployment="gpt-4o-mini",
     model="gpt-4o-mini",
@@ -44,6 +45,7 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
 
 # Define a simple classifier prompt
 classifier_prompt = PromptTemplate(
@@ -67,6 +69,15 @@ def classify_query(query: str) -> str:
     logger.info("============================ Query classified as: %s", result.content if hasattr(result, 'content') else "Error Warning")
     return result.content
 
+
+
+
+
+
+
+
+
+# Define Agent's node
 
 graph_builder = StateGraph(MessagesState)
 
@@ -111,8 +122,12 @@ def retrieve(query: str):
     # logger.info("Combined Documents:\n%s", serialized)
     return serialized, combined_docs
 
+
+
+
+
 def tools_condition(state: MessagesState) -> Union[str, Literal["END"]]:
-    """Decide whether to use the tool or end it, based on the last AI message."""
+    """Decide whether to use the tool or end it, based on the last message."""
     last_message = state["messages"][-1]
     
     # If the message is not an AI message, end
@@ -129,6 +144,8 @@ def tools_condition(state: MessagesState) -> Union[str, Literal["END"]]:
 
 
 # Step1: Generate an AIMessage that may include a tool-call to be sent. AIMessages are final response.
+# 输入是到目前为止的所有消息（包含initial_system_message 和用户问题）。
+# 输出是 AIMessage：要么直接答案，要么包含 tool_calls（模型决定）。
 def query_or_respond(state: MessagesState):
     """Generate tool call for retrieval or respond."""
     llm_with_tools = llm.bind_tools([retrieve])
