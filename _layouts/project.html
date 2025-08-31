@@ -21,6 +21,13 @@ layout: compress
                         <i class="fa fa-home"></i>
                     </a>
                 </div>
+                <div class="project-item">
+                    <h2>My Project Demo</h2>
+                    <video class="project-video" controls preload="metadata" playsinline>
+                        <source src="/assets/videos/demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 <div class="post-list">
                     {% for post in site.posts %} 
                         {% if post.project %}
