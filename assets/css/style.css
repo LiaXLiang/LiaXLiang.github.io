@@ -73,13 +73,11 @@ figcaption {
 }
 
 .project-video {
-  width: 100%;         /* 占满白色容器的宽度 */
-  height: auto;        /* 先让浏览器自己算高度 */
+  width: 100%;
+  max-width: 960px;      /* 自行调宽度上限 */
+  aspect-ratio: 16 / 9;  /* 保持 16:9 比例 */
+  height: auto;
   display: block;
-  margin: 1.5rem auto;
-  border-radius: 12px;
-
-  /* 保持16:9比例 */
-  aspect-ratio: 16/9;     /* 现代浏览器 */
-  object-fit: contain;    /* 不裁剪，留黑边 */
+  margin: 0 auto;        /* 居中 */
+  border-radius: 12px;   /* 跟你卡片风格一致 */
 }
