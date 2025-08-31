@@ -73,7 +73,7 @@ figcaption {
 }
 
 .project-video {
-  width: 100%;
+  width: 35%;
   max-width: 960px;      /* 自行调宽度上限 */
   aspect-ratio: 16 / 9;  /* 保持 16:9 比例 */
   height: auto;
