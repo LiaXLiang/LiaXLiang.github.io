@@ -72,11 +72,18 @@ figcaption {
     height: auto;
 }
 
-.project-video {
-  width: 100%;
-  max-width: 960px;
-  aspect-ratio: 16/9;
+.header .wrapper .content .project-video {
+  width: 100%;        /* 占满白色容器的内容宽度 */
+  max-width: 100%;    /* 不突破白色容器 */
+  aspect-ratio: 16/9; /* 固定比例 */
+  height: auto;
   display: block;
-  margin: 2rem auto;
+  margin: 1.25rem 0;  /* 和标题留点间距 */
   border-radius: 12px;
+  object-fit: contain; /* 完整显示（可能有上下黑边）。想铺满可改 cover */
+}
+
+/* 保险起见：如果主题对 video 有默认 max-width 限制，强制覆盖 */
+.header .wrapper .content video {
+  max-width: 100% !important;
 }
