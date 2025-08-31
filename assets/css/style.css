@@ -72,3 +72,11 @@ figcaption {
     height: auto;
 }
 
+.project-video {
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16/9;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 12px;
+}
