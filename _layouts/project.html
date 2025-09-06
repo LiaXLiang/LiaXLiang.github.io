@@ -7,45 +7,112 @@ layout: compress
 <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"><!--<![endif]-->
 <head>
-    {% include head.html %}
+  {% include head.html %}
+
+  <style>
+    /* 限制白色内容卡片的最大宽度，防止子元素“撑破” */
+    .header .wrapper .content {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* 标题与返回主页按钮的排版（可按主题微调） */
+    .post-title {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .post-title h1 { margin: 0; }
+
+    /* 自适应视频容器：固定比例 + 圆角 + 避免溢出 */
+    .video-wrap {
+      width: 100%;
+      max-width: 900px;       /* 不会比白色卡片更宽 */
+      margin: 1rem auto 0;
+      aspect-ratio: 16 / 9;   /* 现代浏览器 */
+      border-radius: 12px;
+      overflow: hidden;       /* 避免溢出白框 */
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      background: #000;       /* 加载前的底色 */
+    }
+
+    /* 回退：不支持 aspect-ratio 的浏览器 */
+    @supports not (aspect-ratio: 16 / 9) {
+      .video-wrap {
+        position: relative;
+        height: 0;
+        padding-top: 56.25%;  /* 16:9 */
+      }
+      .video-wrap .project-video {
+        position: absolute;
+        inset: 0;
+      }
+    }
+
+    /* 让 <video> 填满容器；想完整展示画面可把 cover 改为 contain */
+    .video-wrap .project-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover; /* 或 contain */
+      background: #000;
+    }
+
+    /* 小标题与间距优化（可选） */
+    .project-item h2 {
+      margin: .5rem 0 .5rem;
+    }
+
+    /* 文章列表的间距（可选） */
+    .post-list ul { list-style: none; padding: 0; margin: 1rem 0; }
+    .post-list li { margin: 1rem 0; }
+  </style>
 </head>
 <body>
-    {% include nav.html %}
-    <!-- Header -->
-    <header class="header" role="banner">
-        <div class="wrapper animated fadeIn">
-            <div class="content">
-                <div class="post-title">
-                    <h1>{{ page.title }}</h1>
-                    <a class="btn zoombtn" href="{{site.url}}">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </div>
-                <div class="project-item">
-                    <h2>My Project Demo</h2>
-                    <video class="project-video" controls preload="metadata" playsinline>
-                        <source src="/assets/videos/RAG_Legal_Assistant.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="post-list">
-                    {% for post in site.posts %} 
-                        {% if post.project %}
-                    <ul>
-                        <li class="wow fadeInLeft" data-wow-duration="1.5s">
-                            <a class="zoombtn" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
-                            <p>{{ post.excerpt }}</p>
-                            <a href="{{ site.url }}{{ post.url }}" class="btn zoombtn">Read More</a>
-                        </li>
-                    </ul>
-                      {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+  {% include nav.html %}
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="wrapper animated fadeIn">
+      <div class="content">
+        <div class="post-title">
+          <h1>{{ page.title }}</h1>
+          <a class="btn zoombtn" href="{{ site.url }}">
+            <i class="fa fa-home"></i>
+          </a>
         </div>
-    </header>
-    {% include scripts.html %}
-    <script src="{{ site.url }}/assets/js/wow.min.js"></script>
-    <script type="text/javascript">(new WOW).init();</script>
+
+        <div class="project-item">
+          <h2>My Project Demo</h2>
+          <div class="video-wrap">
+            <video class="project-video" controls preload="metadata" playsinline>
+              <source src="/assets/videos/RAG_Legal_Assistant.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <div class="post-list">
+          {% for post in site.posts %}
+            {% if post.project %}
+              <ul>
+                <li class="wow fadeInLeft" data-wow-duration="1.5s">
+                  <a class="zoombtn" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                  <p>{{ post.excerpt }}</p>
+                  <a href="{{ site.url }}{{ post.url }}" class="btn zoombtn">Read More</a>
+                </li>
+              </ul>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% include scripts.html %}
+  <script src="{{ site.url }}/assets/js/wow.min.js"></script>
+  <script>(new WOW).init();</script>
 </body>
 </html>
