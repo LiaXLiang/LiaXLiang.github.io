@@ -3,23 +3,26 @@ title: Must-know about LLMs
 layout: post
 ---
 
-## What is the fundamental task of a Language Model (LM)?
+## 1. What is the fundamental task of a Language Model (LM)?
 A language model calculates the probability of a word sequence (i.e., a sentence) appearing. A good language model can tell us what kind of sentences are fluent and natural.
 
-### Language Model: N-gram models
-#### Time: before the rise of deep learning
-#### statistical method (at the time the mainstream of language models)
+### 1.1 Language Model: N-gram models
+- Time: before the rise of deep learning
+- statistical method (at the time the mainstream of language models)
+- Core Idea: the probability of a sentence appearing equals the product of **conditional probabilities** of each word in the sentence. The formula is called **the chain rule of probability**
+- Problem: calculating the conditional probability is almost impossible, since like $P(w_m∣w_1, ..., w_{m-1})$ are too difficult to estimate from a corpus, 
+, as the word sequence $w_1, ..., w_{m-1}$ may have never appeared in the training data.
 
-To understand **Object-Oriented Programming (OOP)**, we must first grasp the concept of an **object**. But to fully appreciate the evolution and purpose of objects in programming, it's helpful to contrast them with their *predecessor*: **Procedure-Oriented Programming (POP)**
+
+To solve this problem, researchers introduced the **Markov Assumption**.
+
+#### Core Idea of Markov Assumption
+We can approximately assume that a word's probability of appearing is only related to the limited **n-1 **words before it. Language models built on this assumption are called N-gram models. 
+- "N" := context window size we consider
+  - e.g., N = 2: Bigram. i.e., a word's appearance is only related to the one word before it. $P(w_i∣w_1, ..., w_{i-1})$ roughly equals $P(w_i∣w_{i-1})$
+  - e.g., N = 3: Trigra. i.e.,  we assume a word's appearance is only related to the two words before it. 
 
 ## A Simple Analogy
-Imagine we're hungry and want to have some *Seafood Spaghetti* for dinner. We have two choices:
-- Option A: Go to the supermarket, buy ingredients like spaghetti, tomato, onion and seafood, and cook the dish yourself.
-- Option B: Go to a restaurant and order a plate of Seafood Spaghetti. 
-  
-Option A represents *Procedure-Oriented Programming*.
-
-Option B represents *Object-Oriented Programming*.
 
 ## Understanding POP
 Cooking at home requires us to know and perform every individual step in the recipe: preparing ingredients, following the cooking process, and cleaning up. 
