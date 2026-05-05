@@ -1,7 +1,14 @@
 ---
-title: What is Object-Oriented Programming?
+title: Must-know about LLMs
 layout: post
 ---
+
+## What is the fundamental task of a Language Model (LM)?
+A language model calculates the probability of a word sequence (i.e., a sentence) appearing. A good language model can tell us what kind of sentences are fluent and natural.
+
+### Language Model: N-gram models
+#### Time: before the rise of deep learning
+#### statistical method (at the time the mainstream of language models)
 
 To understand **Object-Oriented Programming (OOP)**, we must first grasp the concept of an **object**. But to fully appreciate the evolution and purpose of objects in programming, it's helpful to contrast them with their *predecessor*: **Procedure-Oriented Programming (POP)**
 
