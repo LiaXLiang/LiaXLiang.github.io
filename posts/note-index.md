@@ -11,6 +11,8 @@ permalink: /posts/
 
 # 📘 [Operating System Cheatsheet](/posts/note-index-os/)
 
+# 📚 [AI Agent Cheatsheet](/posts/note-index-agents/)
+
 
 
 
