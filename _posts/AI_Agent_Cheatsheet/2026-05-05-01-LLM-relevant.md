@@ -17,7 +17,7 @@ Option B represents *Object-Oriented Programming*.
 ## Understanding POP
 Cooking at home requires us to know and perform every individual step in the recipe: preparing ingredients, following the cooking process, and cleaning up. 
 
-Similarly, in POP, the program is structred as a sequence of steps (procedures) that, written in a top-down manner. 
+Similarly, in POP, the program is structred as a sequence of steps (procedures) tha, written in a top-down manner. 
 
 ### Limitations of POP
 - **Low Reusability**
