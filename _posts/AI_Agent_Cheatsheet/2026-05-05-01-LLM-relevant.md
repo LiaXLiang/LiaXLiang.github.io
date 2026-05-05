@@ -1,7 +1,7 @@
 ---
 title: Must-know about LLMs
 layout: post
-categories: [Agent_Notes, Fundamentals]
+categories: [AI_Agent_Cheatsheet, Fundamentals]
 ---
 ## 1. What is the fundamental task of a Language Model?
 
@@ -49,7 +49,7 @@ requires the full context $(w_1, ..., w_{m-1})$ to appear frequently enough in t
 
 ---
 
-## 1.2 Markov Assumption
+### 1.1.1 Markov Assumption
 
 To make language modeling practical, N-gram models use the **Markov assumption**.
 
@@ -71,31 +71,31 @@ $$
 
 Here, $n$ is the size of the context window.
 
-### Bigram Model
+- Bigram Model
 
-When $n = 2$, the model is called a **bigram model**. It only considers the previous word:
+  When $n = 2$, the model is called a **bigram model**. It only considers the previous word:
 
-$$
-P(w_i \mid w_1, ..., w_{i-1})
-\approx
-P(w_i \mid w_{i-1})
-$$
+  $$
+  P(w_i \mid w_1, ..., w_{i-1})
+  \approx
+  P(w_i \mid w_{i-1})
+  $$
 
-### Trigram Model
+- Trigram Model
 
-When $n = 3$, the model is called a **trigram model**. It considers the previous two words:
+  When $n = 3$, the model is called a **trigram model**. It considers the previous two words:
 
-$$
-P(w_i \mid w_1, ..., w_{i-1})
-\approx
-P(w_i \mid w_{i-2}, w_{i-1})
-$$
+  $$
+  P(w_i \mid w_1, ..., w_{i-1})
+  \approx
+  P(w_i \mid w_{i-2}, w_{i-1})
+  $$
 
 In general, an N-gram model uses the previous $n-1$ words to predict the next word.
 
 ---
 
-## 1.3 Estimating N-gram Probabilities with MLE
+### 1.1.2 Estimating N-gram Probabilities with MLE
 
 N-gram probabilities are usually estimated using **Maximum Likelihood Estimation (MLE)**.
 
@@ -138,37 +138,39 @@ So the estimated probability of `"learning"` appearing after `"deep"` is 0.6.
 
 ---
 
-## 1.4 Limitations of N-gram Models
+### 1.1.3 Limitations of N-gram Models
 
 N-gram models are simple and interpretable, but they have three major limitations.
+- Data Sparsity
+  
+  Imagine you are learning English only by memorizing exact sentences from a textbook. If you see a new sentence that is grammatically correct but never appeared in the textbook, you may mistakenly think it is invalid.
 
-### (1) Data Sparsity
-Imagine you are learning English only by memorizing exact sentences from a textbook. If you see a new sentence that is grammatically correct but never appeared in the textbook, you may mistakenly think it is invalid.
+  N-gram models rely on exact word sequence counts. If a valid phrase never appears in the corpus, the model may assign it zero probability.
 
-N-gram models rely on exact word sequence counts. If a valid phrase never appears in the corpus, the model may assign it zero probability.
+  For example, if `"neural language model"` never appears in the training data, a trigram model may fail to estimate its probability correctly.
 
-For example, if `"neural language model"` never appears in the training data, a trigram model may fail to estimate its probability correctly.
+  This is known as the **zero-probability problem**.
 
-This is known as the **zero-probability problem**.
+- Limited Context
 
-### (2) Limited Context
-Imagine reading a long story but only being allowed to remember the last one or two words. You may understand local phrases, but you will easily miss the larger meaning of the sentence.
+  Imagine reading a long story but only being allowed to remember the last one or two words. You may understand local phrases, but you will easily miss the larger meaning of the sentence.
 
 
-N-gram models only use a fixed-size context window, they struggle to capture long-range dependencies.
+  N-gram models only use a fixed-size context window, they struggle to capture long-range dependencies.
 
-For example:
+  For example:
 
-> The book that I borrowed from the library yesterday was very interesting.
+  > The book that I borrowed from the library yesterday was very interesting.
 
-To understand that `"was"` refers to `"book"`, the model needs information from much earlier in the sentence. Traditional N-gram models are not good at handling this.
+  To understand that `"was"` refers to `"book"`, the model needs information from much earlier in the sentence. Traditional N-gram models are not good at handling this.
 
-### (3) Weak Semantic Representation
-Imagine treating every word as a separate ID number, without knowing what the word means. You may know that two words appear in similar places, but you do not truly understand that they have similar meanings.
+- Weak Semantic Representation
+  
+  Imagine treating every word as a separate ID number, without knowing what the word means. You may know that two words appear in similar places, but you do not truly understand that they have similar meanings.
 
-N-gram models treat words as discrete symbols. They rely on surface-level co-occurrence statistics and do not learn deep semantic relationships.
+  N-gram models treat words as discrete symbols. They rely on surface-level co-occurrence statistics and do not learn deep semantic relationships.
 
-For example, they cannot naturally understand that `"car"` and `"automobile"` are semantically similar unless this relation is reflected in the corpus statistics.
+  For example, they cannot naturally understand that `"car"` and `"automobile"` are semantically similar unless this relation is reflected in the corpus statistics.
 
 ---
 

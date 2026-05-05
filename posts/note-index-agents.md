@@ -42,11 +42,11 @@ details[open] > summary::before {
 
 # 🤖 AI Agent Cheatsheet
 
-{% assign agent_notes = site.posts | where_exp: "item", "item.categories contains 'Agent_Notes'" | sort: "date" | reverse %}
+{% assign agent_notes = site.posts | where_exp: "item", "item.categories contains 'AI_Agent_Cheatsheet'" | sort: "date" | reverse %}
 {% assign grouped = agent_notes | group_by_exp: "post", "post.categories[1]" %}
 
 {% for group in grouped %}
-  <details>
+  <details open>
     <summary>{{ group.name }}</summary>
     <ul>
       {% for post in group.items %}
@@ -56,8 +56,8 @@ details[open] > summary::before {
   </details>
 {% endfor %}
 
-{% if page.categories contains 'Agent_Notes' %}
-  <a href="/posts/note-index-agent/">
+{% if page.categories contains 'AI_Agent_Cheatsheet' %}
+  <a href="/posts/note-index-agents/">
     ⬅ Back to AI Agent Cheatsheet
   </a>
 {% else %}
