@@ -1,6 +1,7 @@
 ---
 title: Must-know about LLMs
 layout: post
+categories: [Agent_Notes, Fundamentals]
 ---
 ## 1. What is the fundamental task of a Language Model?
 
@@ -141,7 +142,7 @@ So the estimated probability of `"learning"` appearing after `"deep"` is 0.6.
 
 N-gram models are simple and interpretable, but they have three major limitations.
 
-### 1. Data Sparsity
+### (1) Data Sparsity
 Imagine you are learning English only by memorizing exact sentences from a textbook. If you see a new sentence that is grammatically correct but never appeared in the textbook, you may mistakenly think it is invalid.
 
 N-gram models rely on exact word sequence counts. If a valid phrase never appears in the corpus, the model may assign it zero probability.
@@ -150,13 +151,11 @@ For example, if `"neural language model"` never appears in the training data, a 
 
 This is known as the **zero-probability problem**.
 
-### 2. Limited Context
+### (2) Limited Context
 Imagine reading a long story but only being allowed to remember the last one or two words. You may understand local phrases, but you will easily miss the larger meaning of the sentence.
 
 
-N-gram models only use a fixed-size context window.
-
-A bigram model only considers one previous word, and a trigram model only considers two previous words. Therefore, they struggle to capture long-range dependencies.
+N-gram models only use a fixed-size context window, they struggle to capture long-range dependencies.
 
 For example:
 
@@ -164,68 +163,12 @@ For example:
 
 To understand that `"was"` refers to `"book"`, the model needs information from much earlier in the sentence. Traditional N-gram models are not good at handling this.
 
-### 3. Weak Semantic Representation
+### (3) Weak Semantic Representation
+Imagine treating every word as a separate ID number, without knowing what the word means. You may know that two words appear in similar places, but you do not truly understand that they have similar meanings.
 
 N-gram models treat words as discrete symbols. They rely on surface-level co-occurrence statistics and do not learn deep semantic relationships.
 
 For example, they cannot naturally understand that `"car"` and `"automobile"` are semantically similar unless this relation is reflected in the corpus statistics.
 
 ---
-
-## 1.5 Interview Summary
-
-The fundamental task of a language model is to estimate the probability of word sequences.
-
-Traditional N-gram models use the chain rule of probability, but directly estimating long-context conditional probabilities is impractical because of data sparsity.
-
-To address this, N-gram models apply the Markov assumption: the current word depends only on the previous $n-1$ words.
-
-N-gram probabilities are commonly estimated using Maximum Likelihood Estimation:
-
-$$
-P(w_i \mid w_{i-1})
-=
-\frac{Count(w_{i-1}, w_i)}{Count(w_{i-1})}
-$$
-
-However, N-gram models suffer from data sparsity, limited context, and weak semantic representation. These limitations motivated the development of neural language models and, later, large language models.
-
-
-
-## A Simple Analogy
-
-## Understanding POP
-Cooking at home requires us to know and perform every individual step in the recipe: preparing ingredients, following the cooking process, and cleaning up. 
-
-Similarly, in POP, the program is structred as a sequence of steps (procedures) tha, written in a top-down manner. 
-
-### Limitations of POP
-- **Low Reusability**
-  - If we’ve written a program that "makes Seafood Spaghetti", and now we want to prepare ***Pizza***, we can’t reuse much of your existing code. We must start a new procedure from scratch - buying different ingredients, following a new set of steps, and writting new code for each part.
-- **High Maintenance Effort**
-  - Suppose we still want Spaghetti, but a ***vegetarian*** version instead of seafood, this requires going back to the recipe, identifying and removing all seafood-related logic, adjusting cooking steps, and carefully ensuring nothing breaks.
-- **Poor Scalability**
-  - As the program grows, managing procedures and shared data becomes more difficult and error-prone.   
-
-## Understanding OOP
-We simply order a dish in the restaurant. We don't need to know how the chef prepares it, which ingredients are used, or how the kitchen is structured. We just interact with the restaurant via a well-defined interface: the waitor.
-
-Similarly, in OOP, object expose **public methods (interface)** and hide internal implementation details (**encapsulation**)
-
-### Advantages of OOP
-- **Modularity and Encapsulation**
-  - There is a pasta chef, and a pizza chef. Each one knows their task, does it well, and doesn't need to understand the others' recipe to contribute. 
-- **Reusability** 
-  - Once the *Pizza* class is defined, we could reuse it anywhere in our program.
-- **Flexibility and Scalability**
-  - It's easier to extend or modify programs without affecting other parts of the program.   
-  
-## Is OOP fancier as POP?
-Yes and No.
-
-At the **machine level**, all programs ultimately execute instructions procedurally - the CPU processes one instruction at a time. OOP doesn't change this underlying behaviour.
-
-However,at the **language and abstraction level**, OOP is a powerful *design paradigm*. By encapsulating data and behaviour into classes and objects, developers can build larger, more maintainable systems that mirror real-world entities and interactions more naturally. 
-
-In other words: OOP is a higher-level abstraction built on top of *procedural* execution, enabling modularity, code reuse, and scalable architecture. OOP is a different way of thinking about problem-solving: While procedural programming focuses on ***how*** things are done, OOP focuses on ***who*** is responsible for doing them.
 
