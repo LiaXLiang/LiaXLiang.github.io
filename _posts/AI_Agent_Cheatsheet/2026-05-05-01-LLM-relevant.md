@@ -25,7 +25,7 @@ Therefore, the fundamental task of a language model is to **model the probabilit
 
 ---
 
-## 1.1 Traditional Language Models: N-gram Models
+## 2 Traditional Language Models: N-gram Models
 
 Before deep learning became dominant, language models were mainly based on statistical methods. A classic example is the **N-gram language model**.
 
@@ -49,7 +49,7 @@ requires the full context $(w_1, ..., w_{m-1})$ to appear frequently enough in t
 
 ---
 
-### 1.1.1 Markov Assumption
+### 2.1 Markov Assumption
 
 To make language modeling practical, N-gram models use the **Markov assumption**.
 
@@ -95,7 +95,7 @@ In general, an N-gram model uses the previous $n-1$ words to predict the next wo
 
 ---
 
-### 1.1.2 Estimating N-gram Probabilities with MLE
+### 2.2 Estimating N-gram Probabilities with MLE
 
 N-gram probabilities are usually estimated using **Maximum Likelihood Estimation (MLE)**.
 
@@ -138,7 +138,7 @@ So the estimated probability of `"learning"` appearing after `"deep"` is 0.6.
 
 ---
 
-### 1.1.3 Limitations of N-gram Models
+### 2.3 Limitations of N-gram Models
 
 N-gram models are simple and interpretable, but they have three major limitations.
 - Data Sparsity
@@ -172,5 +172,4 @@ N-gram models are simple and interpretable, but they have three major limitation
 
   For example, they cannot naturally understand that `"car"` and `"automobile"` are semantically similar unless this relation is reflected in the corpus statistics.
 
----
 
