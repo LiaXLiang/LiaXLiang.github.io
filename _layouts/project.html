@@ -65,6 +65,38 @@ layout: compress
       margin: .5rem 0 .5rem;
     }
 
+    .project-description {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #f2f4f7;
+      color: #333;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .project-highlights {
+      margin: 1.5rem 0;
+      padding-left: 1.2rem;
+    }
+
+    .project-highlights li {
+      margin-bottom: 0.5rem;
+    }
+
     /* 文章列表的间距（可选） */
     .post-list ul { list-style: none; padding: 0; margin: 1rem 0; }
     .post-list li { margin: 1rem 0; }
@@ -85,17 +117,66 @@ layout: compress
         </div>
 
         <div class="project-item">
-          <h2>My Project Demo</h2>
+
+          <h2>A Retrieval-Augmented Legal Intelligence System</h2>
+
+          <p class="project-description">
+            This is a Retrieval-Augmented Generation (RAG) system designed
+            to provide accurate and context-aware legal assistance for German law.
+            The platform integrates statutory legislation from the German Bundestag
+            and real-world court decisions from OpenLegalData through a hybrid retrieval
+            architecture.
+          </p>
+
+          <p class="project-description">
+            By combining multilingual embeddings, vector search, LLM-based query
+            classification, and conversational memory, the system delivers grounded
+            legal answers while significantly reducing hallucinations commonly observed
+            in standalone language models.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">LangGraph</span>
+            <span class="tech-tag">ChromaDB</span>
+            <span class="tech-tag">GPT-4o-mini</span>
+            <span class="tech-tag">Django</span>
+            <span class="tech-tag">Docker</span>
+          </div>
+
+          <ul class="project-highlights">
+            <li>Hybrid retrieval across German statutory laws and legal cases</li>
+            <li>LLM-based query classification with 90.6% precision</li>
+            <li>Multilingual legal embeddings using multilingual-e5-large-instruct</li>
+            <li>Conversation memory powered by LangGraph</li>
+            <li>Retrieval-grounded generation to reduce hallucinations</li>
+            <li>Django-based interactive legal assistant interface</li>
+          </ul>
+
           <div class="video-wrap">
-            <video class="project-video" 
-            controls preload="metadata" playsinline
-            style="width:100%; max-width:900px; aspect-ratio:16/9; height:auto; display:block; object-fit:cover; border-radius:12px; background:#000; margin:0 auto;">
+            <video
+              class="project-video"
+              controls
+              preload="metadata"
+              playsinline
+              style="
+                width:100%;
+                max-width:900px;
+                aspect-ratio:16/9;
+                height:auto;
+                display:block;
+                object-fit:cover;
+                border-radius:12px;
+                background:#000;
+                margin:0 auto;
+              ">
               <source src="/assets/videos/RAG_Legal_Assistant.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
-        </div>
 
+        </div>
         <div class="post-list">
           {% for post in site.posts %}
             {% if post.project %}
